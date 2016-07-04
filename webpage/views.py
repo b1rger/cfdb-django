@@ -6,17 +6,16 @@ from .forms import form_user_login
 from .metadata import PROJECT_METADATA as PM
 
 
-def start_view(request):
+def template_view(request, template):
     if PM is not None:
         context = {"metadata": PM}
     else:
         context = {}
-    return render(request, 'webpage/index.html', context)
-
-
-def about_view(request):
-    context = {}
-    return render(request, 'webpage/about.html', context)
+    if template == '':
+        selected_template = 'webpage/index.html'
+    else:
+        selected_template = 'webpage/{}.html'.format(template)
+    return render(request, selected_template, context)
 
 
 def docu_view(request):

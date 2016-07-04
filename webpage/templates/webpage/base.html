@@ -42,13 +42,13 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li>
-                        <a href="{% url 'webpage:start' %}">Start</a>
+                        <a href="{% url 'webpage:template' template='' %}">Start</a>
                     </li>
                     <li>
-                        <a href="{% url 'webpage:about' %}">About</a>
+                        <a href="{% url 'webpage:template' template='about' %}">About</a>
                     </li>
                     <li>
-                        <a href="{% url 'webpage:docu' %}">Documentation</a>
+                        <a href="{% url 'webpage:template' template='docu' %}">Documentation</a>
                     </li>
                   </ul>
                 </li>
@@ -59,9 +59,6 @@
                   <ul class="dropdown-menu">
                     <li>
                         <a href="{% url 'browsing:browse_tablets' %}">Browse Tablets</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'webpage:about' %}">About</a>
                     </li>
                   </ul>
                 </li>
