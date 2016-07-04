@@ -12,12 +12,14 @@ The application was build with Python 3.4.
 5. browse to http://127.0.0.1:8000/
 
 ## Upload the data
-To ingest some sample data (found in data-directory), you have to execute the ipython scripts 
+To ingest some sample data (found in data-directory), you have to execute the ipython scripts
+ 
 * `importSigns.ipynb`,
 * `importTablets.ipynb`, 
 * `importGlyphs.ipynb`. 
 
-To do so:
+To do so
+
 1. Start a new iypthon session `python manage.py shell_plus --notebook`.
 2. Open e.g. `importSigns.ipynb`.
 3. Execute the script cell by cell. 
