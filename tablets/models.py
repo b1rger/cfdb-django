@@ -80,6 +80,10 @@ class Tablet(models.Model):
     def __str__(self):
         return self.text_reference
 
+    @property
+    def number_of_glyphs(self):
+        return len(Glyph.objects.filter(tablet=self.id))
+
 
 class TabletImage(models.Model):
     tablet = models.ForeignKey(Tablet)

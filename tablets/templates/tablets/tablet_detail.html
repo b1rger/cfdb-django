@@ -1,5 +1,6 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
+{% block Titel %}Tablet - {{ object.title }}{% endblock %}
 {% block scriptHeader %}<!--leafletjs -->
     <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
     <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
