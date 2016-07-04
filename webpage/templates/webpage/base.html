@@ -44,6 +44,12 @@
                     <li>
                         <a href="{% url 'webpage:start' %}">Start</a>
                     </li>
+                    <li>
+                        <a href="{% url 'webpage:about' %}">About</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'webpage:docu' %}">Documentation</a>
+                    </li>
                   </ul>
                 </li>
               <li class="dropdown">
@@ -55,7 +61,7 @@
                         <a href="{% url 'browsing:browse_tablets' %}">Browse Tablets</a>
                     </li>
                     <li>
-                        <a href="#">DummyLink</a>
+                        <a href="{% url 'webpage:about' %}">About</a>
                     </li>
                   </ul>
                 </li>
@@ -88,18 +94,6 @@
       {% endblock %}
     </div>
 
-    <div class="container text-center">
-      <div class="row text-center">
-        <div class="col-sm-6">
-          <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/logo.png' %}" alt="ACDH" width="25%"/>   
-              <p>
-                <strong>Austrian Centre for Digital Humanities</strong>
-              </p>
-          </a>
-        </div>
-      </div>
-    </div>
     {% block scripts %}
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>

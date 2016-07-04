@@ -11,8 +11,17 @@ def start_view(request):
         context = {"metadata": PM}
     else:
         context = {}
-
     return render(request, 'webpage/index.html', context)
+
+
+def about_view(request):
+    context = {}
+    return render(request, 'webpage/about.html', context)
+
+
+def docu_view(request):
+    context = {}
+    return render(request, 'webpage/docu.html', context)
 
 
 #################################################################
