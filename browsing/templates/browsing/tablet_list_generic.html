@@ -1,0 +1,12 @@
+{% extends "browsing/generic_list.html" %}
+{% block Titel %}Browse Tablets{% endblock %}
+{% block list_title %}Browse Tablets{% endblock %}
+
+{% block reset_button %}
+<!-- <a class ="btn btn-default"  id="01">Show/Hide Advanced search options</a></br> -->
+ <p></p>
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_tablets' %}">Reset search</a>     
+{% endblock %}
+
+{% block customScripts %}
+{% endblock %}
