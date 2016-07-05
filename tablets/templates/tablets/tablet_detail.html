@@ -100,28 +100,30 @@
                             </table>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3>{{ images }} Images</h3>
+                     {% if user.is_authenticated %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3>{{ images }} Images</h3>
+                            </div>
+                            <div class="panel panel-body">
+                                <table class="table table-bordered table-hover table-condensed">
+                                    {% for x in img_list %}
+                                    <tr>
+                                        <td><img src="/media/tablet_img/{{ x.filename }}" width="100"></td>
+                                        <td>
+                                        {{ x.comment }}<br/>
+                                            {% if user.is_authenticated %}
+                                            <a href="{% url 'tablets:tabletImg_edit' pk=x.id %}" class="glyphicon glyphicon-edit" aria-hidden="true"></a>
+                                            |
+                                            <a href="#" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
                         </div>
-                        <div class="panel panel-body">
-                            <table class="table table-bordered table-hover table-condensed">
-                                {% for x in img_list %}
-                                <tr>
-                                    <td><img src="/media/tablet_img/{{ x.filename }}" width="100"></td>
-                                    <td>
-                                    {{ x.comment }}<br/>
-                                        {% if user.is_authenticated %}
-                                        <a href="{% url 'tablets:tabletImg_edit' pk=x.id %}" class="glyphicon glyphicon-edit" aria-hidden="true"></a>
-                                        |
-                                        <a href="#" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
                 <div class="col-md-6">
                     <div class="panel panel-default">
