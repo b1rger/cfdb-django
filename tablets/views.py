@@ -57,7 +57,7 @@ def create_glyph(request):
             form.save()
             return redirect('tablets:glyph_list')
         else:
-            return render(request, 'tablets/create_glyph.html', {'form': form})
+            return render(request, 'browsing:browse_glyphs', {'form': form})
     else:
         form = GlyphForm()
         return render(request, 'tablets/create_glyph.html', {'form': form})
@@ -95,7 +95,7 @@ def create_sign(request):
         form = SignForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('tablets:sign_list')
+            return redirect('browsing:browse_signs')
         else:
             return render(request, 'tablets/create_sign.html', {'form': form})
     else:
@@ -137,7 +137,7 @@ def create_tablet(request):
         form = TabletForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('tablets:tablet_list')
+            return redirect('browsing:browse_tablets')
         else:
             return render(request, 'tablets/create_tablet.html', {'form': form})
     else:
