@@ -1,6 +1,10 @@
 {% extends "browsing/generic_list.html" %}
 {% block Titel %}Browse Glyphs{% endblock %}
-{% block list_title %}Browse Glyphs{% endblock %}
+{% block list_title %}Browse Glyphs
+    {% if user.is_authenticated %}
+        | <a class ="btn btn-success"  href="{% url 'tablets:glyph_create' %}">Create new Glyph</a>
+    {% endif %}
+{% endblock %}
 
 {% block reset_button %}
 <!-- <a class ="btn btn-default"  id="01">Show/Hide Advanced search options</a></br> -->

@@ -1,6 +1,10 @@
 {% extends "browsing/generic_list.html" %}
 {% block Titel %}Browse Signs{% endblock %}
-{% block list_title %}Browse Signs{% endblock %}
+{% block list_title %}Browse Signs 
+    {% if user.is_authenticated %}
+        | <a class ="btn btn-success"  href="{% url 'tablets:sign_create' %}">Create new Sign</a>
+    {% endif %}
+{% endblock %}
 
 {% block reset_button %}
 <!-- <a class ="btn btn-default"  id="01">Show/Hide Advanced search options</a></br> -->
