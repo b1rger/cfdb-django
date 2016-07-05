@@ -55,9 +55,9 @@ def create_glyph(request):
         form = GlyphForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('tablets:glyph_list')
+            return redirect('browsing:browse_glyphs')
         else:
-            return render(request, 'browsing:browse_glyphs', {'form': form})
+            return render(request, 'tablets:create_glyph', {'form': form})
     else:
         form = GlyphForm()
         return render(request, 'tablets/create_glyph.html', {'form': form})
