@@ -18,11 +18,6 @@ def template_view(request, template):
     return render(request, selected_template, context)
 
 
-def docu_view(request):
-    context = {}
-    return render(request, 'webpage/docu.html', context)
-
-
 #################################################################
 #               views for login/logout                          #
 #################################################################

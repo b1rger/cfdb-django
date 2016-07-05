@@ -21,9 +21,14 @@ class TabletTable(tables.Table):
 
 
 class SignTable(tables.Table):
-    Sign_name = tables.LinkColumn('tablets:tablet_detail', args=[A('pk')])
+    sign_name = tables.LinkColumn('tablets:sign_detail', args=[A('pk')], verbose_name='Sign Name')
+    nrglyphs = tables.Column(empty_values=(), orderable=False, verbose_name='Number of Glyphs')
+
+    def render_nrglyphs(self, value, record):
+        glyphs = Glyph.objects.filter(sign=record.id)
+        return len(glyphs)
 
     class Meta:
         model = Sign
-        fields = ['title']
+        exclude = ['image_1', 'image_2']
         attrs = {"class": "table table-hover table-striped table-condensed"}
