@@ -1,5 +1,5 @@
 import django_filters
-from tablets.models import Tablet
+from tablets.models import Tablet, Sign, Glyph
 
 django_filters.filters.LOOKUP_TYPES = [
     ('', '---------'),
@@ -45,3 +45,30 @@ class SignListFilter(django_filters.FilterSet):
     sign_name = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
     abz_number = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
     meszl_number = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
+
+    class Meta:
+        model = Sign
+
+
+class GlyphListFilter(django_filters.FilterSet):
+    identifier = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
+    tablet__title = django_filters.CharFilter(
+        lookup_expr='icontains', help_text="Filter by (part of the) tablets's name.")
+    sign__sign_name = django_filters.CharFilter(
+        lookup_expr='icontains', help_text="Filter by (part of the) sign's name.")
+    sign__sign_name = django_filters.CharFilter(
+        lookup_expr='icontains', help_text="Filter by (part of the) sign's reading'.")
+    context = django_filters.CharFilter(
+        lookup_expr='icontains', help_text="Filter by (part of the) glyphs's context'.")
+    note = django_filters.CharFilter(
+        lookup_expr='icontains', help_text="Filter by (part of the) glyphs's note'.")
+    sign = django_filters.ModelMultipleChoiceFilter(
+        queryset=Sign.objects.all(), label='Signs',
+        help_text='Filter by selecting one ore more Signs.')
+    reading = django_filters.ModelMultipleChoiceFilter(
+        queryset=Sign.objects.all(), label='Signs',
+        help_text='Filter by selecting one ore more Readings.')
+
+    class Meta:
+        model = Glyph
+        exclude = ['tablet']

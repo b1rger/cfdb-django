@@ -30,5 +30,17 @@ class SignTable(tables.Table):
 
     class Meta:
         model = Sign
-        exclude = ['image_1', 'image_2']
+        exclude = ['id', 'image_1', 'image_2']
+        attrs = {"class": "table table-hover table-striped table-condensed"}
+
+
+class GlyphTable(tables.Table):
+    identifier = tables.LinkColumn('tablets:glyph_detail', args=[A('pk')], verbose_name='Glyph')
+    tablet = tables.LinkColumn(
+        'tablets:tablet_detail', args=[A('tablet.pk')], verbose_name='Tablet')
+    sign = tables.LinkColumn('tablets:sign_detail', args=[A('sign.pk')], verbose_name='Sign')
+
+    class Meta:
+        model = Glyph
+        exclude = ['id', 'image', 'note']
         attrs = {"class": "table table-hover table-striped table-condensed"}

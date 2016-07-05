@@ -1,8 +1,8 @@
 from django_tables2 import SingleTableView, RequestConfig
-from tablets.models import Tablet, Sign
-from .filters import TabletListFilter, SignListFilter
+from tablets.models import Tablet, Sign, Glyph
+from .filters import TabletListFilter, SignListFilter, GlyphListFilter
 from .forms import GenericFilterFormHelper
-from .tables import TabletTable, SignTable
+from .tables import TabletTable, SignTable, GlyphTable
 
 
 class GenericListView(SingleTableView):
@@ -40,6 +40,14 @@ class TabletListView(GenericListView):
 class SignListView(GenericListView):
     model = Sign
     table_class = SignTable
-    template_name = 'browsing/tablet_list_generic.html'
+    template_name = 'browsing/sign_list_generic.html'
     filter_class = SignListFilter
+    formhelper_class = GenericFilterFormHelper
+
+
+class GlyphListView(GenericListView):
+    model = Glyph
+    table_class = GlyphTable
+    template_name = 'browsing/glyph_list_generic.html'
+    filter_class = GlyphListFilter
     formhelper_class = GenericFilterFormHelper
