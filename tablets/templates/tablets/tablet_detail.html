@@ -27,14 +27,16 @@
                         <div class="panel panel-body">
                             <table class="table table-bordered table-hover table-condensed">
                                 <tr>
-                                    <th class="col-sm-3">Region</th>
+                                    <th class="col-sm-3">Place (Region)</th>
                                     <td class="readmore col-sm-3"><small></small></td>
-                                    <td class="col-sm-6"><a href="{{ object.region.id }}">{{ object.region }}</a></td>
+                                    <td class="col-sm-6">
+                                        <a href="{% url 'browsing:browse_tablets' %}?place={{ object.place.id }}">{{ object.place }} ({{ object.region }})</a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Archive</th>
                                     <td class="readmore"><small></small></td>
-                                    <td><a href="{{ object.archive.id }}">{{ object.archive }}</a> {{ object.dossier }}</td>
+                                    <td><a href="{% url 'browsing:browse_tablets' %}?archive={{ object.archive.id }}">{{ object.archive }}</a> {{ object.dossier }}</td>
                                 </tr>
                                 <tr>
                                     <th>CDLI no.</th>
@@ -54,12 +56,16 @@
                                 <tr>
                                     <th>Scribe</th>
                                     <td class="readmore"><small></small></td>
-                                    <td>{{ object.scribe }}</td>
+                                    <td>
+                                        <a href="{% url 'browsing:browse_tablets' %}?scribe={{ object.scribe.id }}">{{ object.scribe }}</a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Period</th>
                                     <td class="readmore"><small></small></td>
-                                    <td><abbr title="{{ object.date_not_after}}-{{ object.date_not_before }}">{{ object.period }}</abbr></td>
+                                    <td><abbr title="{{ object.date_not_after}}-{{ object.date_not_before }}">
+                                        <a href="{% url 'browsing:browse_tablets' %}?period={{ object.period.id }}">{{ object.period }}</a></abbr>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Babyloneian Time</th>
