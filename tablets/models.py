@@ -74,7 +74,7 @@ class Tablet(models.Model):
         max_length=250, blank=True,
         help_text="Im Text erwähnte Personen")
     bibliography = models.CharField(
-        max_length=250, blank=True,
+        max_length=500, blank=True,
         help_text="Transliterationen oder Abdrucke ")
 
     def __str__(self):
