@@ -1,6 +1,9 @@
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views.generic.edit import DeleteView
+from django.core.urlresolvers import reverse_lazy
 from .models import Tablet, Glyph, TabletImage, Sign
 from .forms import TabletForm, SignForm, GlyphForm, TabletImageForm
 
@@ -84,6 +87,16 @@ def edit_glyph(request, pk):
         return render(request, 'tablets/create_glyph.html', {'form': form, 'instance': instance})
 
 
+class GlyphDelete(DeleteView):
+    model = Glyph
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_glyphs')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(GlyphDelete, self).dispatch(*args, **kwargs)
+
+
 class SignDetailView(DetailView):
     model = Sign
 
@@ -124,6 +137,16 @@ def edit_sign(request, pk):
     else:
         form = SignForm(instance=instance)
         return render(request, 'tablets/create_sign.html', {'form': form, 'instance': instance})
+
+
+class SignDelete(DeleteView):
+    model = Sign
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_signs')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SignDelete, self).dispatch(*args, **kwargs)
 
 
 class TabletDetailView(DetailView):
@@ -168,3 +191,13 @@ def edit_tablet(request, pk):
     else:
         form = TabletForm(instance=instance)
         return render(request, 'tablets/create_tablet.html', {'form': form, 'instance': instance})
+
+
+class TabletDelete(DeleteView):
+    model = Tablet
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_tablets')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TabletDelete, self).dispatch(*args, **kwargs)
