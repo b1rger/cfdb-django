@@ -1,5 +1,6 @@
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Tablet, Glyph, TabletImage, Sign
 from .forms import TabletForm, SignForm, GlyphForm, TabletImageForm
 
@@ -12,6 +13,7 @@ class TabletImageDetailView(DetailView):
         return context
 
 
+@login_required
 def create_tabletImg(request):
     if request.method == "POST":
         form = TabletImageForm(request.POST, request.FILES)
@@ -25,6 +27,7 @@ def create_tabletImg(request):
         return render(request, 'tablets/create_tabletImg.html', {'form': form})
 
 
+@login_required
 def edit_tabletImg(request, pk):
     instance = get_object_or_404(TabletImage, id=pk)
     if request.method == "POST":
@@ -50,6 +53,7 @@ class GlyphDetailView(DetailView):
         return context
 
 
+@login_required
 def create_glyph(request):
     if request.method == "POST":
         form = GlyphForm(request.POST, request.FILES)
@@ -63,6 +67,7 @@ def create_glyph(request):
         return render(request, 'tablets/create_glyph.html', {'form': form})
 
 
+@login_required
 def edit_glyph(request, pk):
     instance = get_object_or_404(Glyph, id=pk)
     if request.method == "POST":
@@ -90,6 +95,7 @@ class SignDetailView(DetailView):
         return context
 
 
+@login_required
 def create_sign(request):
     if request.method == "POST":
         form = SignForm(request.POST, request.FILES)
@@ -103,6 +109,7 @@ def create_sign(request):
         return render(request, 'tablets/create_sign.html', {'form': form})
 
 
+@login_required
 def edit_sign(request, pk):
     instance = get_object_or_404(Sign, id=pk)
     if request.method == "POST":
@@ -132,6 +139,7 @@ class TabletDetailView(DetailView):
         return context
 
 
+@login_required
 def create_tablet(request):
     if request.method == "POST":
         form = TabletForm(request.POST, request.FILES)
@@ -145,6 +153,7 @@ def create_tablet(request):
         return render(request, 'tablets/create_tablet.html', {'form': form})
 
 
+@login_required
 def edit_tablet(request, pk):
     instance = get_object_or_404(Tablet, id=pk)
     if request.method == "POST":
