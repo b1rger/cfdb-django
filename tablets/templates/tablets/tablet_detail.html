@@ -113,9 +113,8 @@
                                         <td>
                                         {{ x.comment }}<br/>
                                             {% if user.is_authenticated %}
-                                            <a href="{% url 'tablets:tabletImg_edit' pk=x.id %}" class="glyphicon glyphicon-edit" aria-hidden="true"></a>
-                                            |
-                                            <a href="#" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></a>
+                                            <a href="{% url 'tablets:tabletimg_detail' pk=x.id %}" class="glyphicon glyphicon-new-window
+" aria-hidden="true"></a>
                                             {% endif %}
                                         </td>
                                     </tr>
