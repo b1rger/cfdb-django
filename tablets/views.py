@@ -8,6 +8,13 @@ from .models import Tablet, Glyph, TabletImage, Sign
 from .forms import TabletForm, SignForm, GlyphForm, TabletImageForm
 
 
+def tablet_to_tei(request, pk):
+    instance = get_object_or_404(Tablet, id=pk)
+    context = {'object': instance}
+    return render(
+        request, 'tablets/tablet_to_tei.html', context, content_type="application/xhtml+xml")
+
+
 class TabletImageDetailView(DetailView):
     model = TabletImage
 

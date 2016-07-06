@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'^detail/(?P<pk>[0-9]+)$', views.TabletDetailView.as_view(), name='tablet_detail'),
+    url(r'^detail/(?P<pk>[0-9]+)/xml$', views.tablet_to_tei, name='tablet_to_tei'),
     url(r'^create/$', views.create_tablet, name='tablet_create'),
     url(r'^edit/(?P<pk>[0-9]+)$', views.edit_tablet, name='tablet_edit'),
     url(r'^delete/(?P<pk>[0-9]+)$', views.TabletDelete.as_view(), name='tablet_delete'),
