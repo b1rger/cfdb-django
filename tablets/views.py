@@ -24,10 +24,10 @@ def create_tabletImg(request):
             form.save()
             return redirect('browsing:browse_tabletimages')
         else:
-            return render(request, 'tablets/create_tabletimg.html', {'form': form})
+            return render(request, 'tablets/create_tabletImg.html', {'form': form})
     else:
         form = TabletImageForm()
-        return render(request, 'tablets/create_tabletimg.html', {'form': form})
+        return render(request, 'tablets/create_tabletImg.html', {'form': form})
 
 
 @login_required
