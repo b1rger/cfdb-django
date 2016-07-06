@@ -56,6 +56,6 @@ class GlyphListView(GenericListView):
 class TabletImageListView(GenericListView):
     model = TabletImage
     table_class = TabletImageTable
-    template_name = 'browsing/tabletImage_list_generic.html'
+    template_name = 'browsing/tabletimage_list_generic.html'
     filter_class = TabletImageListFilter
     formhelper_class = GenericFilterFormHelper
