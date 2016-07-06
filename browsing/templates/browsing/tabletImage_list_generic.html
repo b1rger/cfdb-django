@@ -1,0 +1,16 @@
+{% extends "browsing/generic_list.html" %}
+{% block Titel %}Browse Tablet Images{% endblock %}
+{% block list_title %}Browse Tablet Images 
+    {% if user.is_authenticated %}
+        | <a class ="btn btn-success"  href="{% url 'tablets:tabletimg_create' %}">Create new Tablet Image</a>
+    {% endif %}
+{% endblock %}
+
+{% block reset_button %}
+<!-- <a class ="btn btn-default"  id="01">Show/Hide Advanced search options</a></br> -->
+ <p></p>
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_tabletimages' %}">Reset search</a>     
+{% endblock %}
+
+{% block customScripts %}
+{% endblock %}

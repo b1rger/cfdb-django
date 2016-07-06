@@ -1,5 +1,5 @@
 import django_filters
-from tablets.models import Tablet, Sign, Glyph
+from tablets.models import Tablet, Sign, Glyph, TabletImage
 
 django_filters.filters.LOOKUP_TYPES = [
     ('', '---------'),
@@ -16,6 +16,19 @@ django_filters.filters.LOOKUP_TYPES = [
     ('icontains', 'Contains (case insensitive)'),
     ('not_contains', 'Does not contain'),
 ]
+
+
+class TabletImageListFilter(django_filters.FilterSet):
+    tablet__title = django_filters.CharFilter(
+        lookup_expr='icontains', help_text="Filter by (part of the) tablets's name.")
+    tablet = django_filters.ModelMultipleChoiceFilter(
+        queryset=Tablet.objects.all(), label='Tablet',
+        help_text='Filter by selecting one ore more Tablets.')
+    comment = django_filters.CharFilter(
+        lookup_expr='icontains', help_text="Filter by (part of the) comments.")
+
+    class Meta:
+        model = TabletImage
 
 
 class TabletListFilter(django_filters.FilterSet):
@@ -43,6 +56,9 @@ class TabletListFilter(django_filters.FilterSet):
 
 class SignListFilter(django_filters.FilterSet):
     sign_name = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
+    sign_name = django_filters.ModelMultipleChoiceFilter(
+        queryset=Sign.objects.all(), label='Signs',
+        help_text='Filter by selecting one ore more Signs.')
     abz_number = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
     meszl_number = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
 

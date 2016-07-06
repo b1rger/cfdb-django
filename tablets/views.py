@@ -22,12 +22,12 @@ def create_tabletImg(request):
         form = TabletImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('tablets:tabletImg_list')
+            return redirect('browsing:browse_tabletimages')
         else:
-            return render(request, 'tablets/create_tabletImg.html', {'form': form})
+            return render(request, 'tablets/create_tabletimg.html', {'form': form})
     else:
         form = TabletImageForm()
-        return render(request, 'tablets/create_tabletImg.html', {'form': form})
+        return render(request, 'tablets/create_tabletimg.html', {'form': form})
 
 
 @login_required
@@ -37,15 +37,25 @@ def edit_tabletImg(request, pk):
         form = TabletImageForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('tablets:tabletImg_detail', pk=pk)
+            return redirect('tablets:tabletimg_detail', pk=pk)
         else:
             return render(
-                request, 'tablets/create_tabletImg.html', {'form': form, 'instance': instance}
+                request, 'tablets/create_tabletimg.html', {'form': form, 'instance': instance}
             )
     else:
         form = TabletImageForm(instance=instance)
         return render(
-            request, 'tablets/create_tabletImg.html', {'form': form, 'instance': instance})
+            request, 'tablets/create_tabletimg.html', {'form': form, 'instance': instance})
+
+
+class TabletImageDelete(DeleteView):
+    model = TabletImage
+    template_name = 'webpage/confirm_delete.html'
+    success_url = reverse_lazy('browsing:browse_tabletimages')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TabletImageDelete, self).dispatch(*args, **kwargs)
 
 
 class GlyphDetailView(DetailView):

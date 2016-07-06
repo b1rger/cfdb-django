@@ -1,6 +1,6 @@
 import django_tables2 as tables
 from django_tables2.utils import A
-from tablets.models import Tablet, Sign, Glyph
+from tablets.models import Tablet, Sign, Glyph, TabletImage
 
 
 class TabletTable(tables.Table):
@@ -43,4 +43,15 @@ class GlyphTable(tables.Table):
     class Meta:
         model = Glyph
         exclude = ['id', 'image', 'note']
+        attrs = {"class": "table table-hover table-striped table-condensed"}
+
+
+class TabletImageTable(tables.Table):
+    id = tables.LinkColumn(
+        'tablets:tabletimg_detail', args=[A('pk')], verbose_name='ID')
+    tablet = tables.LinkColumn(
+        'tablets:tablet_detail', args=[A('tablet.pk')], verbose_name='Tablet')
+
+    class Meta:
+        model = TabletImage
         attrs = {"class": "table table-hover table-striped table-condensed"}

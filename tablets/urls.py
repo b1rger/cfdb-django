@@ -1,3 +1,4 @@
+
 from django.conf.urls import url
 from . import views
 
@@ -14,8 +15,11 @@ urlpatterns = [
     url(r'^glyph/create/$', views.create_glyph, name='glyph_create'),
     url(r'^glyph/edit/(?P<pk>[0-9]+)$', views.edit_glyph, name='glyph_edit'),
     url(r'^glyph/delete/(?P<pk>[0-9]+)$', views.GlyphDelete.as_view(), name='glyph_delete'),
-    url(r'^tabletImg/detail/(?P<pk>[0-9]+)$',
-        views.TabletImageDetailView.as_view(), name='tabletImg_detail'),
-    url(r'^tabletImg/create/$', views.create_tabletImg, name='tabletImg_create'),
-    url(r'^tabletImg/edit/(?P<pk>[0-9]+)$', views.edit_tabletImg, name='tabletImg_edit'),
+    url(r'^tabletimg/detail/(?P<pk>[0-9]+)$',
+        views.TabletImageDetailView.as_view(), name='tabletimg_detail'),
+    url(r'^tabletimg/create/$', views.create_tabletImg, name='tabletimg_create'),
+    url(r'^tabletimg/edit/(?P<pk>[0-9]+)$', views.edit_tabletImg, name='tabletimg_edit'),
+    url(
+        r'^tabletimage/delete/(?P<pk>[0-9]+)$',
+        views.TabletImageDelete.as_view(), name='tabletimage_delete'),
 ]

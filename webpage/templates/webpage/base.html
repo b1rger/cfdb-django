@@ -97,6 +97,11 @@
                     <li>
                         <a href="{% url 'browsing:browse_signs' %}">Browse Standardsigns</a>
                     </li>
+                    {% if user.is_authenticated %}
+                      <li>
+                          <a href="{% url 'browsing:browse_tabletimages' %}">Browse Tablet Images</a>
+                      </li>
+                    {% endif %}
                   </ul>
                 </li>
             </ul>
