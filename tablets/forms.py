@@ -15,9 +15,10 @@ class CutForm(forms.ModelForm):
             self.helper = FormHelper()
             self.helper.add_input(Submit('submit', 'save'))
             self.helper.layout = Layout(
-                'sign', 'reading', 'context', 'note', 'image',
+                'sign', 'reading', 'context', 'note',
                 Field('identifier', type="hidden"),
-                Field('tablet', type="hidden")
+                Field('tablet', type="hidden"),
+                Field('image', type="hidden")
             )
 
 
