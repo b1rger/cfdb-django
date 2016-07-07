@@ -6,12 +6,14 @@ from places.models import Place
 PLACE_CHOICES = (
     ('external', 'external'),
     ('conjecture', 'conjecture'),
-    ('internal', 'internal')
+    ('internal', 'internal'),
+    ('', '---------')
 )
 
 DCUTUS_CHOICES = (
     ('normal', 'normal'),
-    ('slanting', 'slanting')
+    ('slanting', 'slanting'),
+    ('', '---------')
 )
 
 
@@ -55,7 +57,7 @@ class Tablet(models.Model):
     place = models.ForeignKey(
         Place, blank=True, null=True)
     place_information = models.CharField(
-        max_length=50, blank=True, choices=PLACE_CHOICES,
+        max_length=50, blank=True, choices=PLACE_CHOICES, default="",
         help_text="indicates the nature of the evidence supporting the reliability or accuracy of the intervention or interpretation. Suggested values include: 1] internal; 2] external; 3] conjecture")
     scribe = models.ForeignKey(
         Scribe, blank=True, null=True, help_text="Schreiber")
@@ -67,7 +69,7 @@ class Tablet(models.Model):
     babyloneian_time = models.CharField(max_length=50, blank=True)
     ductus = models.CharField(
         max_length=50, blank=True, choices=DCUTUS_CHOICES,
-        help_text="Gerader oder schräger Schriftduktus")
+        help_text="Gerader oder schräger Schriftduktus", default="")
     text_type = models.ForeignKey(TextType, blank=True, null=True)
     content = models.TextField(
         blank=True, null=True, help_text="Zusammenfassung d. Inhalts")
