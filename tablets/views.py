@@ -15,6 +15,7 @@ def tablet_to_tei(request, pk):
         request, 'tablets/tablet_to_tei.html', context, content_type="application/xhtml+xml")
 
 
+
 class TabletImageDetailView(DetailView):
     model = TabletImage
 
