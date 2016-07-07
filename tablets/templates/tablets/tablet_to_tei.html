@@ -53,11 +53,11 @@
         <tei:profileDesc>
             <tei:creation>
                 <tei:origPlace>
-                    <tei:placeName evidence="internal">Babylon</tei:placeName>
+                    <tei:placeName evidence="{{ object.place_information }}">{{ object.place }}</tei:placeName>
                 </tei:origPlace>
                 <tei:origDate>
-                    <tei:date calendar="#gregorian" notAfter="" notBefore="" period="achaemenid">514</tei:date>
-                    <tei:date calendar="#babylonian">Dar08-IV-26</tei:date>
+                    <tei:date calendar="#gregorian" notAfter="{{ object.date_not_after }}" notBefore="{{ date_not_before }}" period="{{ object.period }}">514</tei:date>
+                    <tei:date calendar="#babylonian">{{ babyloneian_time }}</tei:date>
                     <tei:note/>
                 </tei:origDate>
             </tei:creation>

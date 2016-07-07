@@ -61,6 +61,7 @@ class Tablet(models.Model):
         Scribe, blank=True, null=True, help_text="Schreiber")
     period = models.ForeignKey(
         Period, blank=True, null=True)
+    year = models.IntegerField(blank=True, null=True)
     date_not_after = models.IntegerField(blank=True, null=True)
     date_not_before = models.IntegerField(blank=True, null=True)
     babyloneian_time = models.CharField(max_length=50, blank=True)
