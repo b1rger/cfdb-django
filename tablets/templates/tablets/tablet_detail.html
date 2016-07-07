@@ -22,6 +22,8 @@
                                 {% if user.is_authenticated %}
                                     <a href="{% url 'tablets:tablet_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true"></a> | <a href="{% url 'tablets:tablet_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></a>
                                 {% endif %}
+                                | <a href="{% url 'tablets:tablet_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true"></a> | <a href="{% url 'tablets:tablet_to_tei' pk=object.id %}" class="glyphicon glyphicon-save" title="download data in XML/TEI" aria-hidden="true"></a>
+
                             </h3>
                         </div>
                         <div class="panel panel-body">

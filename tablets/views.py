@@ -11,9 +11,12 @@ from .forms import TabletForm, SignForm, GlyphForm, TabletImageForm
 def tablet_to_tei(request, pk):
     instance = get_object_or_404(Tablet, id=pk)
     context = {'object': instance}
+    try:
+        context['glyph_list'] = Glyph.objects.filter(tablet=pk)
+    except:
+        pass
     return render(
         request, 'tablets/tablet_to_tei.html', context, content_type="application/xhtml+xml")
-
 
 
 class TabletImageDetailView(DetailView):
