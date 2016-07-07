@@ -1,7 +1,24 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout, Field
 from .models import Tablet, Glyph, TabletImage, Sign
+
+
+class CutForm(forms.ModelForm):
+
+    class Meta:
+        model = Glyph
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+            super(CutForm, self).__init__(*args, **kwargs)
+            self.helper = FormHelper()
+            self.helper.add_input(Submit('submit', 'save'))
+            self.helper.layout = Layout(
+                'sign', 'reading', 'context', 'note', 'image',
+                Field('identifier', type="hidden"),
+                Field('tablet', type="hidden")
+            )
 
 
 class TabletForm(forms.ModelForm):

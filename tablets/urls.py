@@ -22,4 +22,7 @@ urlpatterns = [
     url(
         r'^tabletimage/delete/(?P<pk>[0-9]+)$',
         views.TabletImageDelete.as_view(), name='tabletimage_delete'),
+    url(
+        r'^tabletimage/cut/(?P<pk>[0-9]+)$',
+        views.cut_tabletImg, name='tabletimage_cut'),
 ]

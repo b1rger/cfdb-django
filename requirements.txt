@@ -28,9 +28,11 @@ notebook==4.0.6
 path.py==8.1.2
 pickleshare==0.5
 Pygments==2.0.2
+python-slugify==1.2.0
 pyzmq==15.1.0
 requests==2.8.1
 simplegeneric==0.8.1
 six==1.10.0
 tornado==4.3
 traitlets==4.0.0
+Unidecode==0.4.19

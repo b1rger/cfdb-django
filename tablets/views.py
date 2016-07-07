@@ -1,3 +1,5 @@
+import uuid
+from slugify import slugify
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -5,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
 from .models import Tablet, Glyph, TabletImage, Sign
-from .forms import TabletForm, SignForm, GlyphForm, TabletImageForm
+from .forms import TabletForm, SignForm, GlyphForm, TabletImageForm, CutForm
 
 
 def tablet_to_tei(request, pk):
@@ -24,7 +26,31 @@ class TabletImageDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(TabletImageDetailView, self).get_context_data(**kwargs)
+        current_object = self.object
+        context['glyph_list'] = Glyph.objects.filter(tablet=current_object.tablet.id)
         return context
+
+
+@login_required
+def cut_tabletImg(request, pk):
+    context = {}
+    context['instance'] = get_object_or_404(TabletImage, id=pk)
+    instance = TabletImage.objects.get(id=pk)
+    identifier = "{}__{}".format(str(uuid.uuid4()), slugify(instance.tablet.title))
+    if request.method == "GET":
+        context['form'] = CutForm(
+            {'tablet': instance.tablet, 'identifier': identifier})
+        return render(request, 'tablets/cut_tabletimg.html', context)
+    elif request.method == "POST":
+        context['form'] = CutForm(request.POST, request.FILES)
+        if context['form'].is_valid():
+            context['form'].save()
+            return redirect('tablets:tabletimg_detail', pk=instance.id)
+        else:
+            return render(request, 'tablets/cut_tabletimg.html', context)
+    else:
+        pass
+
 
 
 @login_required

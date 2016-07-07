@@ -15,12 +15,12 @@
     </div>
         <div class="panel panel-body">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3>Metadata
                                 {% if user.is_authenticated %}
-                                    <a href="{% url 'tablets:tabletimg_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true"></a> | <a href="{% url 'tablets:tabletimage_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></a>
+                                    <a href="{% url 'tablets:tabletimg_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true" title="edit Tablet Image"></a> | <a href="{% url 'tablets:tabletimage_cut' pk=object.id %}" class="glyphicon glyphicon-scissors" aria-hidden="true" title="create new Glyph out of Tablet Image"></a> | <a href="{% url 'tablets:tabletimage_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" aria-hidden="true" title="delete Tablet Image"></a>
                                 {% endif %}
                             </h3>
                         </div>
@@ -42,6 +42,15 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"> {{ glyph_list|length }} Glyphs</div>
+                        <div class="panel panel-body">
+                            {% for x in glyph_list %}
+                                <li>{{ x.sign.sign_name }}</li>
+                            {% endfor %}
+                        </div>
                 </div>
             </div>
         </div>
