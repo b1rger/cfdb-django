@@ -63,10 +63,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Period</th>
+                                    <th>Period | Year | Range</th>
                                     <td class="readmore"><small></small></td>
-                                    <td><abbr title="{{ object.date_not_after}}-{{ object.date_not_before }}">
-                                        <a href="{% url 'browsing:browse_tablets' %}?period={{ object.period.id }}">{{ object.period }}</a></abbr>
+                                    <td>
+                                        <a href="{% url 'browsing:browse_tablets' %}?period={{ object.period.id }}">{{ object.period }}</a> | {{ object.year }} | {{ object.date_not_after }} - {{ object.date_not_before }}
                                     </td>
                                 </tr>
                                 <tr>

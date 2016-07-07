@@ -56,7 +56,7 @@
                     <tei:placeName evidence="{{ object.place_information }}">{{ object.place }}</tei:placeName>
                 </tei:origPlace>
                 <tei:origDate>
-                    <tei:date calendar="#gregorian" notAfter="{{ object.date_not_after }}" notBefore="{{ date_not_before }}" period="{{ object.period }}">514</tei:date>
+                    <tei:date calendar="#gregorian" notAfter="{{ object.date_not_after }}" notBefore="{{ date_not_before }}" period="{{ object.period }}">{{ object.year }}</tei:date>
                     <tei:date calendar="#babylonian">{{ babyloneian_time }}</tei:date>
                     <tei:note/>
                 </tei:origDate>
