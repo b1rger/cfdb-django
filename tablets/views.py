@@ -34,8 +34,9 @@ class TabletImageDetailView(DetailView):
 @login_required
 def cut_tabletImg(request, pk):
     context = {}
-    context['instance'] = get_object_or_404(TabletImage, id=pk)
+    context['object'] = get_object_or_404(TabletImage, id=pk)
     instance = TabletImage.objects.get(id=pk)
+    context['glyph_list'] = Glyph.objects.filter(tablet=instance.tablet.id)
     identifier = "{}__{}".format(str(uuid.uuid4()), slugify(instance.tablet.title))
     if request.method == "GET":
         context['form'] = CutForm(
@@ -50,7 +51,6 @@ def cut_tabletImg(request, pk):
             return render(request, 'tablets/cut_tabletimg.html', context)
     else:
         pass
-
 
 
 @login_required

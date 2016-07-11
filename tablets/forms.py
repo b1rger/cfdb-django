@@ -13,7 +13,6 @@ class CutForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
             super(CutForm, self).__init__(*args, **kwargs)
             self.helper = FormHelper()
-            self.helper.add_input(Submit('submit', 'save'))
             self.helper.layout = Layout(
                 'sign', 'reading', 'context', 'note',
                 Field('identifier', type="hidden"),

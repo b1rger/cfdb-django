@@ -100,7 +100,7 @@ class TabletImage(models.Model):
 class Glyph(models.Model):
     identifier = models.CharField(max_length=250)
     tablet = models.ForeignKey(Tablet, null=True, blank=True)
-    sign = models.ForeignKey(Sign, null=True, blank=True)
+    sign = models.ForeignKey(Sign, default=1)
     reading = models.CharField(max_length=250, blank=True, null=True)
     context = models.CharField(max_length=250, blank=True, null=True)
     note = models.CharField(max_length=250, blank=True, null=True)

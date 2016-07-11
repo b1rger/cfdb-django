@@ -14,14 +14,14 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h2>Cut some Glyphs from {{ instance.tablet }}</h2>
+        <h2>Cut some Glyphs from {{ object.tablet }}</h2>
     </div>
         <div class="panel panel-body">
             <div class="row">
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3>Glyph</h3>
+                            Metadata
                         </div>
                         <div class="panel panel-body">
                             {% crispy form %}
@@ -33,7 +33,7 @@
                         <div class="panel-heading">Cut & go</div>
                         <div class="panel panel-body">
                             <div>
-                                <img id="image" src="/media/tablet_img/{{ instance.filename }}">
+                                <img id="image" src="/media/tablet_img/{{ object.filename }}">
                             </div>
                             <hr/>
                             <div class="btn-group btn-group-crop">
@@ -45,7 +45,36 @@
                 </div>
             </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel panel-heading">
+                Glyphs
+            </div>
+            <div class="panel panel-body">
+                <div id="show-glyphs">
+                    <table class="table table-hover table-striped table-condensed">
+                        <tr>
+                            <th>Sign</th>
+                            <th>ABZ-Number</th>
+                            <th>reading</th>
+                            <th>Glyph</th>
+                        </tr>
+                        {% for x in glyph_list %}
+                            <tr>
+                                <td><a href="{% url 'tablets:glyph_detail' pk=x.sign.id %}">{{ x.sign }}</a></td>
+                                <td>{{ x.sign.abz_number }}</td>
+                                <td><a href="{% url 'tablets:glyph_detail' pk=x.id %}">{{ x.reading }}</a></td>
+                                <td>
+                                    <img src="/media/glyph_img/{{ x.filename }}" width="50px"></img>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+          </div>
+    </div>
 </div>
+
 
 <script type="text/javascript">
     
@@ -70,7 +99,7 @@
             document.body.appendChild(newImg);
             console.log(formData.get('identifier'));
 
-            $.ajax('{{ instance.id }}', {
+            $.ajax('{{ object.id }}', {
             method: "POST",
             data: formData,
             processData: false,
@@ -95,23 +124,5 @@
     })  
 </script>
 
-<!-- <script type="text/javascript">
-    $( document ).ready(function() {
-        var map = L.map('map').setView([48.69096, 9.14062], 5);
-
-        L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
-        attribution: 'Data, imagery and map information provided by MapQuest, OpenStreetMap <http://www.openstreetmap.org/copyright> and contributors, ODbL <http://wiki.openstreetmap.org/wiki/Legal_FAQ#3a._I_would_like_to_use_OpenStreetMap_maps._How_should_I_credit_you.3F>',
-        maxZoom: 18
-        }).addTo(map);
-
-        {% for x in object.institution.all %} 
-        {% if x.lat %}
-        L.marker([{{ x.lat }}, {{ x.lng }}])
-        .addTo(map)
-        .bindPopup("<h3> {{object.name}}</h3><table class='table table-striped'> <tr> <td>responsible Institution: </td> <td>{{ x.name }}</td> </tr> <tr> <td>located in: </td> <td>{{ x.place.name }} ({{ x.place.part_of.name }})</td> </tr><tr> <td>more projects from this institution: </td> <td><a href='{% url 'browsing:browse_editions' %}?name=&institution__name={{x.name}}'>{{ x.name }}</a></td> </tr>  </table>");
-        {% endif %}
-        {% endfor %}
-        });
-</script> -->
 {% endblock %}
 
