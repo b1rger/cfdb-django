@@ -8,10 +8,11 @@ __pycache__/
 #migrations
 /db.sqlite3
 /cfdb_django/settings/pandorfer_local.py
+/cfdb_django/settings/local.py
 /cfdb_django/settings/server.py
-/digedcat3.4
 /cfdb_django/settings/ksenia_server.py
 /playAndTry.ipynb
 /cfdb_django/db.sqlite3
 staticfiles
 /Untitled.ipynb
+

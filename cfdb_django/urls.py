@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from autocomplete_light import shortcuts as al
+
 al.autodiscover()
 
 urlpatterns = [
