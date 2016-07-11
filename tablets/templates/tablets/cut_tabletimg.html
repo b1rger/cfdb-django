@@ -60,7 +60,7 @@
                         </tr>
                         {% for x in glyph_list %}
                             <tr>
-                                <td><a href="{% url 'tablets:glyph_detail' pk=x.sign.id %}">{{ x.sign }}</a></td>
+                                <td><a href="{% url 'tablets:sign_detail' pk=x.sign.id %}">{{ x.sign }}</a></td>
                                 <td>{{ x.sign.abz_number }}</td>
                                 <td><a href="{% url 'tablets:glyph_detail' pk=x.id %}">{{ x.reading }}</a></td>
                                 <td>
