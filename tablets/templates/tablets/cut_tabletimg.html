@@ -18,17 +18,8 @@
     </div>
         <div class="panel panel-body">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Metadata
-                        </div>
-                        <div class="panel panel-body">
-                            {% crispy form %}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
+                
+                <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">Cut & go</div>
                         <div class="panel panel-body">
@@ -44,8 +35,18 @@
                         </div>
                 </div>
             </div>
-        </div>
-        <div class="panel panel-default">
+            <div class="col-md-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Metadata
+                        </div>
+                        <div class="panel panel-body">
+                            {% crispy form %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
             <div class="panel panel-heading">
                 Glyphs
             </div>
@@ -72,7 +73,10 @@
                 </div>
             </div>
           </div>
-    </div>
+        </div>
+                </div>
+        </div>
+        
 </div>
 
 
@@ -85,7 +89,9 @@
     $('#btn-crop').click(function () {
         var newImg = $img.cropper("getCroppedCanvas").toBlob(function (blob) {
             var formData = new FormData(document.querySelector("form"));
-            formData.append('image', blob);
+            var newFileName = formData.get('identifier')+".png"
+            formData.append('image', blob, newFileName);
+            /*formData.append('filename', newFileName);*/
             url = URL.createObjectURL(blob);
             var newImg = document.createElement("img"),
             url = URL.createObjectURL(blob);
@@ -106,6 +112,7 @@
             contentType: false,
             success: function () {
               console.log('Upload success');
+              location.reload();
             },
             error: function () {
               console.log('Upload error');
