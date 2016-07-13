@@ -13,7 +13,7 @@
 {% block content %}
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h2>Cut some Glyphs from {{ object.tablet }}</h2>
+        <h2>Cut some Glyphs from <a href="{% url 'tablets:tablet_detail' pk=object.tablet.id %}">{{ object.tablet }}</a></h2>
     </div>
         <div class="panel panel-body">
             <div class="row">
@@ -46,36 +46,35 @@
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-default">
-            <div class="panel panel-heading">
-                Glyphs
-            </div>
-            <div class="panel panel-body">
-                <div id="show-glyphs">
-                    <table class="table table-hover table-striped table-condensed">
-                        <tr>
-                            <th>Sign</th>
-                            <th>ABZ-Number</th>
-                            <th>reading</th>
-                            <th>Glyph</th>
-                        </tr>
-                        {% for x in glyph_list %}
-                            <tr>
-                                <td><a href="{% url 'tablets:sign_detail' pk=x.sign.id %}">{{ x.sign }}</a></td>
-                                <td>{{ x.sign.abz_number }}</td>
-                                <td><a href="{% url 'tablets:glyph_detail' pk=x.id %}">{{ x.reading }}</a></td>
-                                <td>
-                                    <img src="/media/glyph_img/{{ x.filename }}" width="50px"></img>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
+                    <div class="panel panel-heading">
+                        Glyphs
+                    </div>
+                    <div class="panel panel-body">
+                        <div id="show-glyphs">
+                            <table class="table table-hover table-striped table-condensed">
+                                <tr>
+                                    <th>Sign</th>
+                                    <th>ABZ-Number</th>
+                                    <th>reading</th>
+                                    <th>Glyph</th>
+                                </tr>
+                                {% for x in glyph_list %}
+                                    <tr>
+                                        <td><a href="{% url 'tablets:sign_detail' pk=x.sign.id %}">{{ x.sign }}</a></td>
+                                        <td>{{ x.sign.abz_number }}</td>
+                                        <td><a href="{% url 'tablets:glyph_detail' pk=x.id %}">{{ x.reading }}</a></td>
+                                        <td>
+                                            <img src="/media/glyph_img/{{ x.filename }}" width="50px"></img>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-          </div>
         </div>
-                </div>
-        </div>
-        
+    </div>  
 </div>
 
 
@@ -86,6 +85,7 @@
 <script>
     var $img = $('#image').cropper();
     $('#btn-crop').click(function () {
+        $('html, body').css("cursor", "wait");
         var newImg = $img.cropper("getCroppedCanvas").toBlob(function (blob) {
             var formData = new FormData(document.querySelector("form"));
             var newFileName = formData.get('identifier')+".png"
@@ -110,6 +110,7 @@
             processData: false,
             contentType: false,
             success: function () {
+              $('html, body').css("cursor", "default");
               console.log('Upload success');
               location.reload();
             },
