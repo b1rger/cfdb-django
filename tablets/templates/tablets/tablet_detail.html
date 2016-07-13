@@ -111,7 +111,7 @@
                                 <table class="table table-bordered table-hover table-condensed">
                                     {% for x in img_list %}
                                     <tr>
-                                        <td><img src="/media/tablet_img/{{ x.filename }}" width="100"></td>
+                                        <td><img src="{% url 'protected_server' pic=x.filename %}" width="100"></td>
                                         <td>
                                         {{ x.comment }}<br/>
                                             {% if user.is_authenticated %}

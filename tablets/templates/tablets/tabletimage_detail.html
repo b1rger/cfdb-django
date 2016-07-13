@@ -26,7 +26,7 @@
                         </div>
                         <div class="panel panel-body">
                             <div style="text-align:center; padding:20px;">
-                                <img src="/media/tablet_img/{{ object.filename }}" width="300">
+                                <img src="{% url 'protected_server' pic=object.filename %}" width="300">
                             </div>
                             <table class="table table-bordered table-hover table-condensed">
                                 <tr>

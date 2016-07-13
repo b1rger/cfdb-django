@@ -5,9 +5,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import DeleteView
+from django.views.static import serve
 from django.core.urlresolvers import reverse_lazy
 from .models import Tablet, Glyph, TabletImage, Sign
 from .forms import TabletForm, SignForm, GlyphForm, TabletImageForm, CutForm
+
+
+@login_required
+def protected_serve(request, pic):
+    show_indexes = "media/tablet_img/"
+    pic = pic
+    return serve(request, pic, show_indexes)
 
 
 def tablet_to_tei(request, pk):
