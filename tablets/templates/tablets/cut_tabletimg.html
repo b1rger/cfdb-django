@@ -17,14 +17,13 @@
     </div>
         <div class="panel panel-body">
             <div class="row">
-                
-                <div class="col-md-6">
+                <div class="col-md-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Cut & go</div>
+                        <div class="panel-heading">
+                            Metadata
+                        </div>
                         <div class="panel panel-body">
-                            <div>
-                                <img id="image" src="/media/tablet_img/{{ object.filename }}">
-                            </div>
+                            {% crispy form %}
                             <hr/>
                             <div class="btn-group btn-group-crop">
                                 <button id="btn-crop" type="button" class="btn btn-primary" data-method="getCroppedCanvas">
@@ -32,20 +31,21 @@
                                 </button>
                             </div>
                         </div>
-                </div>
-            </div>
-            <div class="col-md-2">
+                    </div>
+                </div>                
+                <div class="col-md-10">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Metadata
-                        </div>
+                        <div class="panel-heading">Cut & go</div>
                         <div class="panel panel-body">
-                            {% crispy form %}
+                            <div>
+                                <img id="image" src="/media/tablet_img/{{ object.filename }}">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
+                
+            </div>
+                <div class="panel panel-default">
                     <div class="panel panel-heading">
                         Glyphs
                     </div>
