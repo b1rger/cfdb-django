@@ -24,3 +24,6 @@ class Place(models.Model):
             return self.name +" (" + " ".join([str(x.label) for x in self.alternative_name.all()]) + ")"
         else:
             return self.name
+
+    class Meta:
+        ordering = ('name',)

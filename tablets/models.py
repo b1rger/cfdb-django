@@ -35,6 +35,9 @@ class Sign(models.Model):
     def image2_name(self):
         return os.path.basename(self.image_2.name)
 
+    class Meta:
+        ordering = ('sign_name',)
+
 
 class Tablet(models.Model):
     text_reference = models.CharField(
@@ -87,6 +90,9 @@ class Tablet(models.Model):
     def number_of_glyphs(self):
         return len(Glyph.objects.filter(tablet=self.id))
 
+    class Meta:
+        ordering = ('title',)
+
 
 class TabletImage(models.Model):
     tablet = models.ForeignKey(Tablet)
@@ -95,6 +101,9 @@ class TabletImage(models.Model):
 
     def filename(self):
         return os.path.basename(self.image.name)
+
+    class Meta:
+        ordering = ('tablet',)
 
 
 class Glyph(models.Model):
@@ -111,3 +120,6 @@ class Glyph(models.Model):
 
     def filename(self):
         return os.path.basename(self.image.name)
+
+    class Meta:
+        ordering = ('sign',)
