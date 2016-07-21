@@ -1,0 +1,93 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% block Titel %}some charts{% endblock %}
+
+{% block scriptHeader %}
+    <!--highcharts -->
+        <script src="{% static 'charts/highcharts/highcharts.js' %}"></script>
+        
+        <script src="{% static 'charts/highcharts/exporting.js' %}"></script>
+    <!--highcharts END -->
+{% endblock %}
+{% block content %}
+    <div style="text-align:right">
+        <select id="chartselector">
+            <option value="---">---</option>
+            <option value="{% url 'charts:tablets_per_region' %}">Tables per Region</option>
+            <option value="{% url 'charts:tablets_per_period' %}">Tables per Period</option>
+            <option value="{% url 'charts:tablets_per_scribe' %}">Tables per Scribe</option>
+        </select>
+    </div>
+    <div>
+        <h1>Please - make a selection</h1>
+    </div>
+    <div id="container" style="min-width: 300px; height: 700px; margin: 0 auto"/>
+    
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $("#chartselector").change(function(){
+            var which_chart = $("#chartselector option:selected").val();
+            console.log(which_chart);
+            $.getJSON( which_chart, function( data ) {
+                $('html, body').css("cursor", "default");        
+                var items = (data.payload).slice(1, data.payload.items);
+                var measuredObject = data.measuredObject
+                var header = data.title;
+                $("h1").text(header);
+                console.log(items);
+                $(function () {
+                    $('#container').highcharts({
+                    chart: {
+                    type: 'column'
+                    },
+                    title: {
+                        text: ""
+                        },
+                    subtitle: {
+                        text: data.subtitle
+                        },
+                    xAxis: {
+                        type: 'category',
+                        labels: {
+                        rotation: -45,
+                        style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                        }
+                        }
+                        },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                        text: data.legendy
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                        },
+                    tooltip: {
+                    },
+                    series: [{
+                    name: measuredObject,
+                    data: items,
+                    dataLabels: {
+                    enabled: false,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y:.1f}', // one decimal
+                    y: 10, // 10 pixels down from the top
+                    style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                    }
+                    }
+                    }]
+                    });
+                });
+            });
+        });
+    </script>
+{% endblock %}
+

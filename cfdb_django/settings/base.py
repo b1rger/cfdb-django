@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'vocabularies',
     'places',
     'labels',
+    'charts',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
