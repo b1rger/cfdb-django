@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.db.models import Count
-from tablets.models import Tablet
+from tablets.models import Tablet, Glyph, Sign
 from vocabularies.models import Region, Scribe, Period
 
 DATA = {"status": "ok",
@@ -97,6 +97,29 @@ def tablets_per_period(request):
             "legendx": "Period",
             "legendy": "# of Tablets",
             "measuredObject": "Tablets",
+            "payload": payload
+            }
+    return JsonResponse(data)
+
+
+def glyphs_per_sign(request):
+    glyphs = Glyph.objects.values('sign').annotate(totalcount=Count('sign')).order_by('-totalcount')
+    payload = []
+    for x in glyphs:
+        if x['totalcount'] is not None:
+            temp_sign = Sign.objects.get(id=int(x['sign']))
+            entry = ["{} ({})".format(temp_sign.sign_name, temp_sign.abz_number), x['totalcount']]
+            payload.append(entry)
+        else:
+            if x['totalcount'] > 0:
+                entry = ["None", x['totalcount']]
+                payload.append(entry)
+    data = {"items": len(Glyph.objects.all()),
+            "title": "Glyphs per Sign",
+            "subtitle": "Distribution of Glyphs over Signs",
+            "legendx": "Sign",
+            "legendy": "# of Glyphs",
+            "measuredObject": "Glyphs",
             "payload": payload
             }
     return JsonResponse(data)
