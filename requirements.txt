@@ -8,6 +8,7 @@ django-crispy-forms==1.5.2
 django-extensions==1.6.1
 django-filter==0.13.0
 django-markdown-deux==1.0.5
+django-reversion==2.0.5
 django-tables2==1.1.6
 djangorestframework==3.2.4
 djangorestframework-csv==1.4.1

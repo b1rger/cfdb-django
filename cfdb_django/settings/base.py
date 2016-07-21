@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django_tables2',
     'django_spaghetti',
+    'reversion',
     'crispy_forms',
     'rest_framework',
     'browsing',
@@ -61,6 +62,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'reversion.middleware.RevisionMiddleware',
 ]
 
 ROOT_URLCONF = 'cfdb_django.urls'

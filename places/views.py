@@ -18,6 +18,7 @@ class PlaceListView(generic.ListView):
 	def get_queryset(self):
 		return Place.objects.all()
 
+
 @login_required
 def create_place(request):
 	if request.method == "POST":

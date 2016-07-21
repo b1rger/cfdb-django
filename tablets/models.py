@@ -1,4 +1,5 @@
 import os
+from reversion import revisions as reversion
 from django.db import models
 from vocabularies.models import Region, Archive, Dossier, Scribe, Period, TextType
 from places.models import Place
@@ -37,6 +38,8 @@ class Sign(models.Model):
 
     class Meta:
         ordering = ('sign_name',)
+
+reversion.register(Sign)
 
 
 class Tablet(models.Model):
@@ -93,6 +96,8 @@ class Tablet(models.Model):
     class Meta:
         ordering = ('title',)
 
+reversion.register(Tablet)
+
 
 class TabletImage(models.Model):
     tablet = models.ForeignKey(Tablet)
@@ -104,6 +109,8 @@ class TabletImage(models.Model):
 
     class Meta:
         ordering = ('tablet',)
+
+reversion.register(TabletImage)
 
 
 class Glyph(models.Model):
@@ -123,3 +130,5 @@ class Glyph(models.Model):
 
     class Meta:
         ordering = ('sign',)
+
+reversion.register(Glyph)
