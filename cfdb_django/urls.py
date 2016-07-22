@@ -22,7 +22,7 @@ router.register(r'periods', PeriodViewSet)
 router.register(r'texttypes', TextTypeViewSet)
 router.register(r'signs', SignViewSet)
 router.register(r'tablets', TabletViewSet)
-router.register(r'tabletimages', TabletImageViewSet)
+# router.register(r'tabletimages', TabletImageViewSet)
 router.register(r'glyphs', GlyphViewSet)
 
 urlpatterns = [
