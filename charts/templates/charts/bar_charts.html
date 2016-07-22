@@ -32,7 +32,7 @@
             console.log(which_chart);
             $.getJSON( which_chart, function( data ) {
                 $('html, body').css("cursor", "default");        
-                var items = (data.payload).slice(1, data.payload.items);
+                var items = data.payload;
                 var measuredObject = data.measuredObject
                 var header = data.title;
                 $("h1").text(header);
