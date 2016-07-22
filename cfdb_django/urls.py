@@ -3,14 +3,32 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from tablets.views import protected_serve
-
 from autocomplete_light import shortcuts as al
-
+from rest_framework import routers
+from vocabularies.api_views import *
+from tablets.api_views import *
+from places.api_views import *
+from labels.api_views import *
 al.autodiscover()
-#url(r'^edit/(?P<pk>[0-9]+)$', views.edit_tablet, name='tablet_edit'),
+
+router = routers.DefaultRouter()
+router.register(r'places', PlaceViewSet)
+router.register(r'labels', LabelViewSet)
+router.register(r'regions', RegionViewSet)
+router.register(r'archives', ArchiveViewSet)
+router.register(r'dossiers', DossierViewSet)
+router.register(r'scribes', ScribeViewSet)
+router.register(r'periods', PeriodViewSet)
+router.register(r'texttypes', TextTypeViewSet)
+router.register(r'signs', SignViewSet)
+router.register(r'tablets', TabletViewSet)
+router.register(r'tabletimages', TabletImageViewSet)
+router.register(r'glyphs', GlyphViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^data/api/', include(router.urls)),
+    url(r'^data/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('webpage.urls', namespace='webpage')),
     url(r'^media/tablet_img/(?P<pic>.*)$', protected_serve, name='protected_server'),
     url(r'places/', include('places.urls', namespace='places')),
