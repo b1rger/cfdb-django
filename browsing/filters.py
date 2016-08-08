@@ -45,6 +45,7 @@ class TabletListFilter(django_filters.FilterSet):
     )
     date_not_after = django_filters.NumberFilter(
         lookup_expr='lte', label='Date not after', help_text='Lesser than or equal to')
+    date_comment = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
     babyloneian_time = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
     content = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
     distinctive_protagonists = django_filters.CharFilter(lookup_expr='icontains', help_text=False)

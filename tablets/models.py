@@ -73,6 +73,7 @@ class Tablet(models.Model):
     date_not_after = models.IntegerField(blank=True, null=True)
     date_not_before = models.IntegerField(blank=True, null=True)
     babyloneian_time = models.CharField(max_length=50, blank=True)
+    date_comment = models.TextField(blank=True, null=True)
     ductus = models.CharField(
         max_length=50, blank=True, choices=DCUTUS_CHOICES,
         help_text="Gerader oder schräger Schriftduktus", default="")
