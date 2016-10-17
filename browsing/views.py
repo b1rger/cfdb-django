@@ -1,7 +1,7 @@
 from django_tables2 import SingleTableView, RequestConfig
 from tablets.models import Tablet, Sign, Glyph, TabletImage
 from .filters import TabletListFilter, SignListFilter, GlyphListFilter, TabletImageListFilter
-from .forms import GenericFilterFormHelper
+from .forms import GenericFilterFormHelper, TabletFilterFormHelper
 from .tables import TabletTable, SignTable, GlyphTable, TabletImageTable
 
 
@@ -34,7 +34,7 @@ class TabletListView(GenericListView):
     table_class = TabletTable
     template_name = 'browsing/tablet_list_generic.html'
     filter_class = TabletListFilter
-    formhelper_class = GenericFilterFormHelper
+    formhelper_class = TabletFilterFormHelper
 
 
 class SignListView(GenericListView):
