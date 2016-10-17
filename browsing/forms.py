@@ -34,6 +34,10 @@ class TabletFilterFormHelper(FormHelper):
                 css_id="basic_search_fields"),
             Fieldset(
                 'Advanced search options',
+                'archive',
+                'dossier',
+                'nabucco_no',
+                'museum_no',
                 'date_comment',
                 'ductus',
                 'content',
