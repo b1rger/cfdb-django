@@ -39,6 +39,7 @@ class Sign(models.Model):
     class Meta:
         ordering = ('sign_name',)
 
+
 reversion.register(Sign)
 
 
@@ -72,7 +73,7 @@ class Tablet(models.Model):
     year = models.IntegerField(blank=True, null=True)
     date_not_after = models.IntegerField(blank=True, null=True)
     date_not_before = models.IntegerField(blank=True, null=True)
-    babyloneian_time = models.CharField(max_length=50, blank=True)
+    babyloneian_time = models.CharField(max_length=50, blank=True, verbose_name="Babylonian time")
     date_comment = models.TextField(blank=True, null=True)
     ductus = models.CharField(
         max_length=50, blank=True, choices=DCUTUS_CHOICES,
@@ -97,6 +98,7 @@ class Tablet(models.Model):
     class Meta:
         ordering = ('title',)
 
+
 reversion.register(Tablet)
 
 
@@ -110,6 +112,7 @@ class TabletImage(models.Model):
 
     class Meta:
         ordering = ('tablet',)
+
 
 reversion.register(TabletImage)
 
@@ -131,5 +134,6 @@ class Glyph(models.Model):
 
     class Meta:
         ordering = ('sign',)
+
 
 reversion.register(Glyph)
