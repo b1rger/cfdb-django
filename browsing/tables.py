@@ -4,6 +4,7 @@ from tablets.models import Tablet, Sign, Glyph, TabletImage
 
 
 class TabletTable(tables.Table):
+    id = tables.Column(verbose_name='ID')
     title = tables.LinkColumn('tablets:tablet_detail', args=[A('pk')], verbose_name='Tablet')
     period = tables.Column(verbose_name='Period')
     place = tables.Column(verbose_name='Place')
@@ -30,7 +31,7 @@ class SignTable(tables.Table):
 
     class Meta:
         model = Sign
-        exclude = ['id', 'image_1', 'image_2']
+        exclude = ['image_1', 'image_2']
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 

@@ -133,7 +133,7 @@ class Glyph(models.Model):
         return os.path.basename(self.image.name)
 
     class Meta:
-        ordering = ('sign',)
+        ordering = ('-id',)
 
 
 reversion.register(Glyph)
