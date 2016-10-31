@@ -36,6 +36,7 @@ class TabletFilterFormHelper(FormHelper):
                 'Advanced search options',
                 'archive',
                 'dossier',
+                'cdli_no',
                 'nabucco_no',
                 'museum_no',
                 'date_comment',

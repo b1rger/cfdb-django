@@ -35,7 +35,7 @@ class TabletListFilter(django_filters.FilterSet):
     text_reference = django_filters.CharFilter(
         lookup_expr='icontains', label='Tablet', help_text=False)
     title = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
-#   cdli_no = django_filters.CharFilter(lookup_expr='icontains', label='CDLI no.', help_text=False)
+    cdli_no = django_filters.CharFilter(lookup_expr='icontains', label='CDLI no.', help_text=False)
     nabucco_no = django_filters.CharFilter(
         lookup_expr='icontains', label='NABUCCO no.', help_text=False)
     museum_no = django_filters.CharFilter(
@@ -54,7 +54,6 @@ class TabletListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Tablet
-        exclude = ['cdli_no']
 
 
 class SignListFilter(django_filters.FilterSet):
