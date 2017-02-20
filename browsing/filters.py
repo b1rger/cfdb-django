@@ -41,10 +41,10 @@ class TabletListFilter(django_filters.FilterSet):
     museum_no = django_filters.CharFilter(
         lookup_expr='icontains', label='Museum no.', help_text=False)
     date_not_before = django_filters.NumberFilter(
-        lookup_expr='gte', label='Date not before', help_text='Greater than or equal to'
+        lookup_expr='lte', label='Date not before', help_text='Lesser than or equal to'
     )
     date_not_after = django_filters.NumberFilter(
-        lookup_expr='lte', label='Date not after', help_text='Lesser than or equal to')
+        lookup_expr='gte', label='Date not after', help_text='Greater than or equal to')
     date_comment = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
     babyloneian_time = django_filters.CharFilter(
         lookup_expr='icontains', help_text=False, label="Babylonian time")
@@ -77,10 +77,10 @@ class GlyphListFilter(django_filters.FilterSet):
     sign__sign_name = django_filters.CharFilter(
         lookup_expr='icontains', help_text="Filter by (part of the) sign's reading'.")
     tablet__date_not_before = django_filters.NumberFilter(
-        lookup_expr='gte', label='Date not before (BC)', help_text='Greater than or equal to'
+        lookup_expr='lte', label='Date not before (BC)', help_text='Greater than or equal to'
     )
     tablet__date_not_after = django_filters.NumberFilter(
-        lookup_expr='lte', label='Date not after (BC)', help_text='Lesser than or equal to')
+        lookup_expr='gte', label='Date not after (BC)', help_text='Lesser than or equal to')
     context = django_filters.CharFilter(
         lookup_expr='icontains', help_text="Filter by (part of the) glyphs's context'.")
     note = django_filters.CharFilter(

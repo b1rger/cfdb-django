@@ -66,7 +66,7 @@
                                     <th>Period | Year | Range</th>
                                     <td class="readmore"><small></small></td>
                                     <td>
-                                        <a href="{% url 'browsing:browse_tablets' %}?period={{ object.period.id }}">{{ object.period }}</a> | {{ object.year }} | {{ object.date_not_after }} - {{ object.date_not_before }}
+                                        <a href="{% url 'browsing:browse_tablets' %}?period={{ object.period.id }}">{{ object.period }}</a> | {{ object.year }} | {{ object.date_not_before }} - {{ object.date_not_after }} (BC)
                                     </td>
                                 </tr>
                                 <tr>
@@ -181,7 +181,7 @@
     })
     $("#clickme").click(function(){
         $( "td[class~='readmore']" ).toggle("slow");
-    })  
+    })
 </script>
 
 <!-- <script type="text/javascript">
@@ -193,7 +193,7 @@
         maxZoom: 18
         }).addTo(map);
 
-        {% for x in object.institution.all %} 
+        {% for x in object.institution.all %}
         {% if x.lat %}
         L.marker([{{ x.lat }}, {{ x.lng }}])
         .addTo(map)
@@ -203,4 +203,3 @@
         });
 </script> -->
 {% endblock %}
-
