@@ -1,5 +1,7 @@
 import django_filters
 from tablets.models import Tablet, Sign, Glyph, TabletImage
+from vocabularies.models import Region
+from places.models import Place
 
 django_filters.filters.LOOKUP_TYPES = [
     ('', '---------'),
@@ -91,6 +93,12 @@ class GlyphListFilter(django_filters.FilterSet):
     reading = django_filters.ModelMultipleChoiceFilter(
         queryset=Sign.objects.all(), label='Signs',
         help_text='Filter by selecting one ore more Readings.')
+    tablet__place = django_filters.ModelMultipleChoiceFilter(
+        queryset=Place.objects.all(), label='Place',
+        help_text='Filter by selecting one ore more Signs.')
+    tablet__region = django_filters.ModelMultipleChoiceFilter(
+        queryset=Region.objects.all(), label='Region',
+        help_text='Filter by selecting one ore more Signs.')
 
     class Meta:
         model = Glyph
