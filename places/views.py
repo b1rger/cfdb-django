@@ -6,7 +6,7 @@ from django.shortcuts import (render, render_to_response, get_object_or_404,
 	redirect)
 from django.views import generic
 from django.views.generic.edit import DeleteView
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 
 from .models import Place
 from .forms import PlaceForm

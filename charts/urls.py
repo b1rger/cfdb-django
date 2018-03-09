@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from . import views
 
+app_name = 'charts'
+
 urlpatterns = [
     url(r'^barcharts/$', views.barcharts_view, name='bar_charts'),
     url(r'^testjson/$', views.test_json, name='test_json'),

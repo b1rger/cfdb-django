@@ -49,11 +49,14 @@ class Tablet(models.Model):
     title = models.CharField(
         max_length=250, blank=False, help_text="Titel der Instanz")
     region = models.ForeignKey(
-        Region, blank=True, null=True, help_text="Fundregion")
+        Region, blank=True, null=True, help_text="Fundregion",
+        on_delete=models.CASCADE)
     archive = models.ForeignKey(
-        Archive, blank=True, null=True, help_text="Archiv = Sammlung von Tafeln")
+        Archive, blank=True, null=True, help_text="Archiv = Sammlung von Tafeln",
+        on_delete=models.CASCADE)
     dossier = models.ForeignKey(
-        Dossier, blank=True, null=True, help_text="Unterkategorisierung v. Archiven")
+        Dossier, blank=True, null=True, help_text="Unterkategorisierung v. Archiven",
+        on_delete=models.CASCADE)
     cdli_no = models.CharField(
         max_length=50, blank=True, verbose_name="CDLI no.", help_text="Nummer der Tafel in CDLI")
     nabucco_no = models.CharField(
@@ -62,14 +65,17 @@ class Tablet(models.Model):
     museum_no = models.CharField(
         max_length=50, blank=True, verbose_name="Museum Number")
     place = models.ForeignKey(
-        Place, blank=True, null=True)
+        Place, blank=True, null=True,
+        on_delete=models.CASCADE)
     place_information = models.CharField(
         max_length=50, blank=True, choices=PLACE_CHOICES, default="",
         help_text="indicates the nature of the evidence supporting the reliability or accuracy of the intervention or interpretation. Suggested values include: 1] internal; 2] external; 3] conjecture")
     scribe = models.ForeignKey(
-        Scribe, blank=True, null=True, help_text="Schreiber")
+        Scribe, blank=True, null=True, help_text="Schreiber",
+        on_delete=models.CASCADE)
     period = models.ForeignKey(
-        Period, blank=True, null=True)
+        Period, blank=True, null=True,
+        on_delete=models.CASCADE)
     year = models.IntegerField(blank=True, null=True)
     date_not_after = models.IntegerField(blank=True, null=True)
     date_not_before = models.IntegerField(blank=True, null=True)
@@ -78,7 +84,8 @@ class Tablet(models.Model):
     ductus = models.CharField(
         max_length=50, blank=True, choices=DCUTUS_CHOICES,
         help_text="Gerader oder schräger Schriftduktus", default="")
-    text_type = models.ForeignKey(TextType, blank=True, null=True)
+    text_type = models.ForeignKey(TextType, blank=True, null=True,
+        on_delete=models.CASCADE)
     content = models.TextField(
         blank=True, null=True, help_text="Zusammenfassung d. Inhalts")
     distinctive_protagonists = models.CharField(
@@ -103,7 +110,8 @@ reversion.register(Tablet)
 
 
 class TabletImage(models.Model):
-    tablet = models.ForeignKey(Tablet)
+    tablet = models.ForeignKey(Tablet,
+        on_delete=models.CASCADE)
     image = models.FileField(upload_to='tablet_img')
     comment = models.TextField(blank=True, null=True)
 
@@ -119,8 +127,10 @@ reversion.register(TabletImage)
 
 class Glyph(models.Model):
     identifier = models.CharField(max_length=250)
-    tablet = models.ForeignKey(Tablet, null=True, blank=True)
-    sign = models.ForeignKey(Sign, default=1)
+    tablet = models.ForeignKey(Tablet, null=True, blank=True,
+        on_delete=models.CASCADE)
+    sign = models.ForeignKey(Sign, default=1,
+        on_delete=models.CASCADE)
     reading = models.CharField(max_length=250, blank=True, null=True)
     context = models.CharField(max_length=250, blank=True, null=True)
     note = models.CharField(max_length=250, blank=True, null=True)

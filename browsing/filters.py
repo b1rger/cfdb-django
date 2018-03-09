@@ -31,6 +31,7 @@ class TabletImageListFilter(django_filters.FilterSet):
 
     class Meta:
         model = TabletImage
+        exclude = ['image']
 
 
 class TabletListFilter(django_filters.FilterSet):
@@ -56,6 +57,8 @@ class TabletListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Tablet
+        exclude = ['image']
+
 
 
 class SignListFilter(django_filters.FilterSet):
@@ -68,7 +71,8 @@ class SignListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Sign
-
+        exclude = ['image_1', 'image_2']
+        
 
 class GlyphListFilter(django_filters.FilterSet):
     identifier = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
@@ -102,4 +106,4 @@ class GlyphListFilter(django_filters.FilterSet):
 
     class Meta:
         model = Glyph
-        exclude = ['tablet']
+        exclude = ['tablet', 'image']

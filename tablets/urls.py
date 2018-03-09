@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from . import views
 
+app_name = 'tablets'
+
 urlpatterns = [
     url(r'^detail/(?P<pk>[0-9]+)$', views.TabletDetailView.as_view(), name='tablet_detail'),
     url(r'^detail/(?P<pk>[0-9]+)/xml$', views.tablet_to_tei, name='tablet_to_tei'),

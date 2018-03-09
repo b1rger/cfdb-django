@@ -2,6 +2,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from . import views
 
+app_name = 'webpage'
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^(?!admin)(?P<template>\w*)$', views.template_view, name="template"),
