@@ -11,7 +11,7 @@
       {% endblock %}
       <meta name="author" content="{{ metadata.author }}">
       <!-- Bootstrap -->
-      <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap335/css/bootstrap.min.css' %}"/></link>
+      <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap337/css/bootstrap.min.css' %}"/></link>
       <!--scroll to top CSS -->
       <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
       <!-- jQuery -->
@@ -53,9 +53,9 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation!</span>
-            <span class="icon-bar"/>
-            <span class="icon-bar"/>
-            <span class="icon-bar"/>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
         </div>  
         </div>
@@ -138,9 +138,9 @@
             </ul>
         </div>
     </nav>
-    <div class="alert alert-warning">
+   <!--  <div class="alert alert-warning">
     <strong>Warning!</strong> Work in Progress. But entered data will be preserved.
-    </div>
+    </div> -->
 
     <div id="content" class="container">
       {% block content %}
@@ -148,7 +148,7 @@
     </div>
 
     {% block scripts %}
-    <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap337/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
     <!-- scroll-up-bottom -->        
     <script type="text/javascript">

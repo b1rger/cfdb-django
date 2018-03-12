@@ -1,0 +1,258 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% block Titel %}Sign - {{ object.sign_name }}{% endblock %}
+
+{% block scriptHeader %}
+    <!--leafletjs -->
+        <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
+        <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
+        <!-- jQuery -->
+
+        
+        <!--Bootstrap slider-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/css/bootstrap-slider.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.js"></script>
+        <!-- Bootstrap -->
+   
+        <!--Isotop-->
+        <script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
+        
+        
+        
+        <style>
+            /*#map { height: 500px; }*/
+.metadata {
+    position: relative;
+}
+
+.grid-item {
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  border: 2px solid black;
+  width: calc(92% / 4);
+  margin: 1%;
+  text-align: center;
+}
+@media (min-width: 480px) and (max-width: 768px) {
+
+  .grid-item { width: calc(94% / 2); }
+  .glyph-image { width: 50%; }
+
+}
+@media (max-width: 480px) {
+
+  .grid-item { width: 94%; }
+  .glyph-image { width: 50%; }
+
+
+}
+.glyph-image {
+    width: 70%;
+    height: auto;
+    margin-bottom: 20px;
+}
+.glyph-link {
+    
+}
+
+#quicksearch {
+    width: 30%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 20px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#quicksearch:focus {
+   /* width: 60%;*/
+}
+/* --------------------------------------- */
+/* Bootstrap Slider */
+/* --------------------------------------- */
+.sliders { padding: 15px 0 30px 0; }
+.filter-section .filter-label {
+  display: block;
+  font-weight: bold;
+}
+.bootstrap-slider .slider-selection { background: #2175b0; }
+
+        </style>
+    <!--leafletjs END -->
+    <!--tablesorter -->
+        <script src="{% static 'webpage/libraries/jquery.tablesorter/jquery.tablesorter.js' %}"></script>
+        <script src="{% static 'webpage/libraries/jquery.tablesorter/jquery.tablesorter.widgets.js' %}"></script>
+        <script src="{% static 'webpage/libraries/jquery.tablesorter/jquery.tablesorter.pager.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'webpage/libraries/jquery.tablesorter/theme.bootstrap.css' %}"></link>
+        <link rel="stylesheet" type="text/css" href="{% static 'webpage/libraries/jquery.tablesorter/jquery.tablesorter.pager.css' %}"></link>
+        <script> 
+            $(function() { $("table").tablesorter({ theme : "bootstrap", widthFixed: false,
+                headerTemplate : '{content} {icon}', widgets : [ "uitheme", "filter", "zebra" ], filter_cssFilter: "form-control", }) 
+                }); 
+        </script>
+    <!--tablesorter END -->
+{% endblock %}
+{% block content %}
+
+
+
+
+
+
+<!--Metadata block -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Metadata {{ object.sign_name }} (<abbr title="ABZ Number">{{ object.abz_number }}</abbr>)
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'tablets:sign_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true" title="edit Sign"></a> | <a href="{% url 'tablets:sign_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" aria-hidden="true" title="delete Sign"></a>
+                                {% endif %}
+                            </h3>
+                        </div>
+                        <div class="panel-body" style="text-align:center; padding:20px;">
+
+                                <img src="/media/sign_img/{{ object.image1_name }}" width="100"/>
+                                <p>ABZ Number: {{ object.abz_number }} </p>
+                            <p>MesZL Number: {{ object.meszl_number }}</p>
+
+                            
+                        </div>
+                    </div>
+
+
+<!--Refine search -->
+
+
+<p><input type="text" class="quicksearch" placeholder="Search" id="quicksearch"/></p>
+<!--Grid-->
+
+<div class="grid">
+{% for x in glyph_list %}
+
+
+<div class="grid-item">
+<a href="{% url 'tablets:glyph_detail' pk=x.id %}" class="glyph-link">
+<img src="/media/glyph_img/{{ x.filename }}" class="glyph-image">
+</a>
+
+<div class="glyph-description">
+<p>{{ x.reading }} | {{ x.context }}</p>
+<p>{{ x.tablet.period.name }}</p>
+<p>{{ x.tablet.year }}</p>
+<p>{{ x.tablet.date_not_before }} - {{ x.tablet.date_not_after }}</p>
+<p>{{ x.tablet.region.name }}</p>
+<p>{{ x.tablet.scribe.name }}</p>
+</div>
+
+</div>
+
+
+{% endfor %}
+</div>
+<script type="text/javascript">
+
+$(window).on('load resize', function (){
+$('.grid').isotope({
+ itemSelector: '.grid-item',
+});
+
+});
+
+// quick search regex
+var qsRegex;
+var buttonFilter;
+
+// init Isotope
+var $grid = $('.grid').isotope({
+  itemSelector: '.grid-item',
+  // layoutMode: 'fitRows',
+  filter: function() {
+    var $this = $(this);
+    var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
+    var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
+    return searchResult && buttonResult;
+  }
+});
+
+$('#filters').on( 'click', 'button', function() {
+  buttonFilter = $( this ).attr('data-filter');
+  $grid.isotope();
+});
+
+// use value of search field to filter
+var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+  qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+  $grid.isotope();
+}) );
+
+
+  // change is-checked class on buttons
+$('.button-group').each( function( i, buttonGroup ) {
+  var $buttonGroup = $( buttonGroup );
+  $buttonGroup.on( 'click', 'button', function() {
+    $buttonGroup.find('.is-checked').removeClass('is-checked');
+    $( this ).addClass('is-checked');
+  });
+});
+
+
+// debounce so filtering doesn't happen every millisecond
+function debounce( fn, threshold ) {
+  var timeout;
+  return function debounced() {
+    if ( timeout ) {
+      clearTimeout( timeout );
+    }
+    function delayed() {
+      fn();
+      timeout = null;
+    }
+    setTimeout( delayed, threshold || 100 );
+  };
+}
+</script>
+<script>
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $( "td[class~='readmore']" ).hide();
+    })
+    $("#clickme").click(function(){
+        $( "td[class~='readmore']" ).toggle("slow");
+    })  
+</script>
+
+<!-- <script type="text/javascript">
+    $( document ).ready(function() {
+        var map = L.map('map').setView([48.69096, 9.14062], 5);
+
+        L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
+        attribution: 'Data, imagery and map information provided by MapQuest, OpenStreetMap <http://www.openstreetmap.org/copyright> and contributors, ODbL <http://wiki.openstreetmap.org/wiki/Legal_FAQ#3a._I_would_like_to_use_OpenStreetMap_maps._How_should_I_credit_you.3F>',
+        maxZoom: 18
+        }).addTo(map);
+
+        {% for x in object.institution.all %} 
+        {% if x.lat %}
+        L.marker([{{ x.lat }}, {{ x.lng }}])
+        .addTo(map)
+        .bindPopup("<h3> {{object.name}}</h3><table class='table table-striped'> <tr> <td>responsible Institution: </td> <td>{{ x.name }}</td> </tr> <tr> <td>located in: </td> <td>{{ x.place.name }} ({{ x.place.part_of.name }})</td> </tr><tr> <td>more projects from this institution: </td> <td><a href='{% url 'browsing:browse_editions' %}?name=&institution__name={{x.name}}'>{{ x.name }}</a></td> </tr>  </table>");
+        {% endif %}
+        {% endfor %}
+        });
+</script> -->
+{% endblock %}
+

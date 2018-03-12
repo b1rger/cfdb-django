@@ -75,6 +75,8 @@
                                         <th>Image</th>
                                         <th>Reading | Context </th>
                                         <th>Period</th>
+                                        <th>Year</th>
+                                        <th>Dates range BC</th>
                                         <th>Region</th>
                                         <th>Scribe</th>
                                     </tr>
@@ -88,6 +90,8 @@
                                         </td>
                                         <td>{{ x.reading }} | {{ x.context }}</td>
                                         <td>{{ x.tablet.period.name }}</td>
+                                        <td>{{ x.tablet.year }}</td>
+                                        <td>{{ x.tablet.date_not_before }} - {{ x.tablet.date_not_after }}</td>
                                         <td>{{ x.tablet.region.name }}</td>
                                         <td>{{ x.tablet.scribe.name }}</td>
                                     </tr>
