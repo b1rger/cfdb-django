@@ -271,7 +271,7 @@ $(document).ready( function() {
 
   // Initialise Sliders
   // Set min/max range on sliders as well as default values
-  var $yearSlider = $('#filter-year').slider({ tooltip_split: true, min: 0,  max: 800, range: true, value: [0, 800] });
+  var $yearSlider = $('#filter-year').slider({ tooltip_split: true, min: 0,  max: 800, range: true, value: [0, 800], reversed: true });
 
 
 
@@ -283,7 +283,7 @@ $(document).ready( function() {
         // This can be changed by modifying the data-filter-group="age" attribute on the slider HTML
         filterGroup = slider.attr('data-filter-group'),
         // Set current selection in variable that can be pass to the label
-        currentSelection = sldmin + ' - ' + sldmax;
+        currentSelection = sldmax  + ' - ' + sldmin;
 
       // Update filter label with new range selection
       slider.siblings('.filter-label').find('.filter-selection').text(currentSelection);
