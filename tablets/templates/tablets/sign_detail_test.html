@@ -90,15 +90,15 @@
 
 
 #quicksearch {
-    width: 30%;
+    width: 40%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 0px;
-    font-size: 16px;
+    font-size: 14px;
     background-color: white;
     background-position: 10px 10px;
     background-repeat: no-repeat;
-    padding: 12px 20px 12px 20px;
+    padding: 10px 10px 10px 10px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
@@ -116,7 +116,7 @@
 }
 
 .slider.slider-horizontal {
- width: 50%;
+ width: 60%;
 }
 
 .bootstrap-slider .slider-selection { background: #2175b0; }
@@ -161,8 +161,9 @@
 
 <!--Refine search -->
 
-
-<!-- <p><input type="text" class="quicksearch" placeholder="Search" id="quicksearch"/></p> -->
+<div class="search">
+<p><input type="text" class="quicksearch" placeholder="Search" id="quicksearch"/></p>
+</div>
 
 <div class="filters" id="filters">
 
@@ -190,7 +191,7 @@
 <div class="sliders row">
 <div class="col-md-6">
         <div class="bootstrap-slider">
-          <p class="filter-label">Year Range: <span class="filter-selection"></span></p>
+          <p class="filter-label">Filter by Year Range: <span class="filter-selection"></span></p>
           <b class="filter-min">800 BC</b> &nbsp;&nbsp;&nbsp;
           <input id="filter-year" type="text" class="bootstrap-slider" value="" data-filter-group="year">&nbsp;&nbsp;&nbsp;
           <b class="filter-max">0 BC</b>
@@ -217,7 +218,7 @@
 <p>{{ x.tablet.year }}</p>
 <p>{{ x.tablet.date_not_before }} - {{ x.tablet.date_not_after }}</p>
 <p>{{ x.tablet.region }}</p>
-<p>{{ x.tablet.scribe.name }}</p>
+<p id="scribe">{{ x.tablet.scribe.name }}</p>
 </div>
 
 </div>
@@ -247,6 +248,8 @@ $(document).ready( function() {
   var rangeFilters = {
       'year': {'min': 0, 'max': 800}
     };
+  // quick search regex
+  var qsRegex;
 
   // Initialise Isotope
   // Set the item selector
@@ -257,16 +260,24 @@ $(document).ready( function() {
     filter: function() {
       var $this = $(this);
       var year = $this.attr('data-year');
-
       var isInyearRange = (rangeFilters['year'].min <= year && rangeFilters['year'].max >= year);
+
+      //regex
+      var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
 
       //console.log(rangeFilters['year']);
       //console.log(rangeFilters['weight']);
       // Debug to check whether an item is within the year weight range
       //console.log('isInyearRange:' +isInyearRange + '\nisInWeightRange: ' + isInWeightRange );
-      return $this.is( buttonFilter ) && isInyearRange;
+      return $this.is( buttonFilter ) && isInyearRange && searchResult;
     }
   });
+
+  // use value of search field to filter
+var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+  qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+  $grid.isotope();
+}) );
 
 
   // Initialise Sliders
