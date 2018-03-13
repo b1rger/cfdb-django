@@ -1,5 +1,6 @@
 from reversion import revisions as reversion
 from django.db import models
+from django.utils.text import slugify
 
 
 class VocabsBase(models.Model):
@@ -17,6 +18,10 @@ class VocabsBase(models.Model):
         """Returns the name of the class as lowercase string"""
         class_name = str(self.__class__.__name__).lower()
         return class_name
+
+    def get_slug_name(self):
+        slug_name = slugify(self.name)
+        return slug_name
 
 
 class Region(VocabsBase):

@@ -9,6 +9,7 @@ from django.views.static import serve
 from django.urls import reverse_lazy
 from .models import Tablet, Glyph, TabletImage, Sign
 from .forms import TabletForm, SignForm, GlyphForm, TabletImageForm, CutForm
+from vocabularies.models import Region, Period
 
 
 @login_required
@@ -154,13 +155,17 @@ class GlyphDelete(DeleteView):
 
 class SignDetailView(DetailView):
     model = Sign
-    template_name = 'tablets/sign_detail.html'
+    template_name = 'tablets/sign_detail_test.html'
 
     def get_context_data(self, **kwargs):
         current_object = self.object
         context = super(SignDetailView, self).get_context_data(**kwargs)
         context['glyph_list'] = Glyph.objects.filter(sign=current_object.id)
         context['glyphs'] = len(context['glyph_list'])
+        regions = Region.objects.filter(tablet__glyph__sign=current_object.id).exclude(name='')
+        context['region_list'] = set(regions)
+        
+        context['period_list'] = set(Period.objects.filter(tablet__glyph__sign=current_object.id).exclude(name=''))
         return context
 
 
