@@ -162,9 +162,7 @@ class SignDetailView(DetailView):
         context = super(SignDetailView, self).get_context_data(**kwargs)
         context['glyph_list'] = Glyph.objects.filter(sign=current_object.id)
         context['glyphs'] = len(context['glyph_list'])
-        regions = Region.objects.filter(tablet__glyph__sign=current_object.id).exclude(name='')
-        context['region_list'] = set(regions)
-        
+        context['region_list'] = set(Region.objects.filter(tablet__glyph__sign=current_object.id).exclude(name=''))        
         context['period_list'] = set(Period.objects.filter(tablet__glyph__sign=current_object.id).exclude(name=''))
         return context
 
