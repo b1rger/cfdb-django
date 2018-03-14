@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_filters',
     'django_tables2',
-    'django_spaghetti',
+    # 'django_spaghetti',
     'reversion',
     'crispy_forms',
     'rest_framework',

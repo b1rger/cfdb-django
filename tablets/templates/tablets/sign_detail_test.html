@@ -3,125 +3,13 @@
 {% block Titel %}Sign - {{ object.sign_name }}{% endblock %}
 
 {% block scriptHeader %}
-    <!--leafletjs -->
-        <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
-        <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
-        <!-- jQuery -->
-
         <!--Isotop-->
         <script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
-
-        
-
-        
         <!--Bootstrap slider-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/css/bootstrap-slider.min.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.js"></script>
-        <!-- Bootstrap -->
-   
-        
-        
-        
-        
-        <style>
-            /*#map { height: 500px; }*/
-.metadata {
-    position: relative;
-}
-
-.grid-item {
-  float: left;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  position: relative;
-  border: 2px solid black;
-  width: calc(92% / 4);
-  margin: 1%;
-  text-align: center;
-}
-@media (min-width: 480px) and (max-width: 768px) {
-
-  .grid-item { width: calc(94% / 2); }
-  .glyph-image { width: 50%; }
-
-}
-@media (max-width: 480px) {
-
-  .grid-item { width: 94%; }
-  .glyph-image { width: 50%; }
-
-
-}
-.glyph-image {
-    width: 70%;
-    height: auto;
-    margin-bottom: 20px;
-}
-.glyph-link {
-    
-}
-
-.button:hover {
-  background-color: #e7ecef;
-  border-color: #ccc;
-  color: #222;
-
-}
-
-.button:active,
-.button.is-checked {
-  background-color: #007bb4;
-  border-color: #007bb4;
-}
-
-.button.is-checked {
-  color: white;
-  border-color: #007bb4;
-  /*text-shadow: 0 -1px hsla(0, 0%, 0%, 0.8);*/
-}
-
-.button:active, .button.is-checked {
-  /*box-shadow: inset 0 1px 10px hsla(0, 0%, 0%, 0.8);*/
-  border-color: #007bb4;
- 
-}
-
-
-#quicksearch {
-    width: 40%;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 0px;
-    font-size: 14px;
-    background-color: white;
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 10px 10px 10px 10px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-#quicksearch:focus {
-   /* width: 60%;*/
-}
-/* --------------------------------------- */
-/* Bootstrap Slider */
-/* --------------------------------------- */
-.sliders { padding: 15px 0 30px 0; }
-.filter-section .filter-label {
-  display: block;
-  font-weight: bold;
-}
-
-.slider.slider-horizontal {
- width: 60%;
-}
-
-.bootstrap-slider .slider-selection { background: #2175b0; }
-
-        </style>
+        <!-- custom css -->
+      <link rel="stylesheet" href="{% static 'webpage/css/style-cs-filtering.css' %}"/></link>
     <!--leafletjs END -->
     <!--tablesorter -->
         <script src="{% static 'webpage/libraries/jquery.tablesorter/jquery.tablesorter.js' %}"></script>
@@ -134,98 +22,105 @@
                 headerTemplate : '{content} {icon}', widgets : [ "uitheme", "filter", "zebra" ], filter_cssFilter: "form-control", }) 
                 }); 
         </script>
+        <style type="text/css">
+          /*#quicksearch {
+    background-image: url({% static 'webpage/img/search.png' %});
+}*/
+        </style>
     <!--tablesorter END -->
 {% endblock %}
 {% block content %}
 
-
 <!--Metadata block -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3>Metadata {{ object.sign_name }} (<abbr title="ABZ Number">{{ object.abz_number }}</abbr>)
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3><b>{{ object.sign_name }}</b> (<abbr title="ABZ Number">{{ object.abz_number }}</abbr>)
                                 {% if user.is_authenticated %}
-                                    <a href="{% url 'tablets:sign_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true" title="edit Sign"></a> | <a href="{% url 'tablets:sign_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" aria-hidden="true" title="delete Sign"></a>
-                                {% endif %}
-                            </h3>
-                        </div>
-                        <div class="panel-body" style="text-align:center; padding:20px;">
+            <a href="{% url 'tablets:sign_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true" title="edit Sign"></a> | <a href="{% url 'tablets:sign_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" aria-hidden="true" title="delete Sign"></a>
+                   {% endif %}
+        </h3>
+    </div>
+    <div class="panel-body" style="text-align:center; padding:20px;">
+      <div class="row">
+        <div class="col-md-4">
+       <img src="/media/sign_img/{{ object.image1_name }}" class="sign-image"/>
+            <p>ABZ Number: {{ object.abz_number }} </p>
+            <p>MesZL Number: {{ object.meszl_number }}</p>
+        </div>
+        <div class="col-md-8 text-left">
+            <div class="search">
+            <p><input type="text" class="quicksearch" placeholder="Search..." id="quicksearch"/></p>
+            </div>
+            <div class="filters" id="filters">
 
-                                <img src="/media/sign_img/{{ object.image1_name }}" width="100"/>
-                                <p>ABZ Number: {{ object.abz_number }} </p>
-                            <p>MesZL Number: {{ object.meszl_number }}</p>
+                <div class="button-group" data-filter-group="region">
+                    <p>Filter by Regions
+                    <button class="button btn btn-default btn-filter is-checked" data-filter="">show all</button>
+                    {% for x in region_list %}
+                    <button class="button btn btn-default btn-filter" data-filter=".{{x.get_slug_name}}">{{x}}</button>
+                    {% endfor %}
+                    </p>
+                </div>
 
-                            
-                        </div>
+                <div class="button-group" data-filter-group="period">
+                    <p>Filter by Periods
+                    <button class="button btn btn-default btn-filter is-checked" data-filter="">show all</button>
+                    {% for x in period_list %}
+                    <button class="button btn btn-default btn-filter" data-filter=".{{x}}">{{x}}</button>
+                    {% endfor %}
+                    </p>    
+                </div>              
+            </div>
+            <div class="sliders">
+                    <div class="bootstrap-slider">
+                      <p class="filter-label">Filter by Year Range: <span class="filter-selection"></span></p>
+                      <b class="filter-min">800 BC</b> &nbsp;&nbsp;&nbsp;
+                      <input id="filter-year" type="text" class="bootstrap-slider" value="" data-filter-group="year">&nbsp;&nbsp;&nbsp;
+                      <b class="filter-max">0 BC</b>
                     </div>
-
+            </div>
+        </div>
+      </div><!--row ends-->
+    </div>
+</div>
 
 <!--Refine search -->
 
-<div class="search">
-<p><input type="text" class="quicksearch" placeholder="Search" id="quicksearch"/></p>
-</div>
 
-<div class="filters" id="filters">
-
-
-    <div class="button-group" data-filter-group="region">
-        <p>Filter by Regions
-        <button class="button btn btn-default btn-filter is-checked" data-filter="">show all</button>
-        {% for x in region_list %}
-        <button class="button btn btn-default btn-filter" data-filter=".{{x.get_slug_name}}">{{x}}</button>
-        {% endfor %}
-        </p>
-    </div>
-
-    <div class="button-group" data-filter-group="period">
-        <p>Filter by Periods
-        <button class="button btn btn-default btn-filter is-checked" data-filter="">show all</button>
-        {% for x in period_list %}
-        <button class="button btn btn-default btn-filter" data-filter=".{{x}}">{{x}}</button>
-        {% endfor %}
-        </p>    
-    </div>
-   
-
-</div>
-<div class="sliders row">
-<div class="col-md-6">
-        <div class="bootstrap-slider">
-          <p class="filter-label">Filter by Year Range: <span class="filter-selection"></span></p>
-          <b class="filter-min">800 BC</b> &nbsp;&nbsp;&nbsp;
-          <input id="filter-year" type="text" class="bootstrap-slider" value="" data-filter-group="year">&nbsp;&nbsp;&nbsp;
-          <b class="filter-max">0 BC</b>
-        </div>
-      </div>
-
-</div>
 
 
 <!--Grid-->
 
 <div class="grid">
 {% for x in glyph_list %}
-
-
 <div class="grid-item {{x.tablet.region.get_slug_name}} {{x.tablet.period.name}}" data-year="{{x.tablet.year}}">
+
 <a href="{% url 'tablets:glyph_detail' pk=x.id %}" class="glyph-link">
 <img src="/media/glyph_img/{{ x.filename }}" class="glyph-image">
 </a>
-
-<div class="glyph-description">
-<p>{{ x.reading }} | {{ x.context }}</p>
-<p>{{ x.tablet.period.name }}</p>
-<p>{{ x.tablet.year }}</p>
-<p>{{ x.tablet.date_not_before }} - {{ x.tablet.date_not_after }}</p>
-<p>{{ x.tablet.region }}</p>
-<p id="scribe">{{ x.tablet.scribe.name }}</p>
+  <div class="glyph-description text-left">
+    <p>
+    <b>Reading:</b> {{ x.reading }}
+    <br><b>Context:</b> {{ x.context }}    
+    <br><b>Period:</b> {{ x.tablet.period.name }}
+    <br><b>Year:</b> {{ x.tablet.year }}
+    <br><b>Region:</b> {{ x.tablet.region }}
+    <br><b>Scribe:</b> {{ x.tablet.scribe.name }}
+    </p>  
+  </div>
 </div>
-
-</div>
-
-
 {% endfor %}
+
 </div>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>
+
+
 <script type="text/javascript">
 
 $(window).on('load resize', function (){
@@ -234,8 +129,6 @@ $('.grid').isotope({
 });
 
 });
-
-
 
 //add here till debounce
 $(document).ready( function() {
@@ -261,14 +154,8 @@ $(document).ready( function() {
       var $this = $(this);
       var year = $this.attr('data-year');
       var isInyearRange = (rangeFilters['year'].min <= year && rangeFilters['year'].max >= year);
-
       //regex
       var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
-
-      //console.log(rangeFilters['year']);
-      //console.log(rangeFilters['weight']);
-      // Debug to check whether an item is within the year weight range
-      //console.log('isInyearRange:' +isInyearRange + '\nisInWeightRange: ' + isInWeightRange );
       return $this.is( buttonFilter ) && isInyearRange && searchResult;
     }
   });
@@ -283,8 +170,6 @@ var $quicksearch = $('#quicksearch').keyup( debounce( function() {
   // Initialise Sliders
   // Set min/max range on sliders as well as default values
   var $yearSlider = $('#filter-year').slider({ tooltip_split: true, min: 0,  max: 800, range: true, value: [0, 800], reversed: true });
-
-
 
   function updateRangeSlider(slider, slideEvt) {
     console.log('Current slider:' + slider);
@@ -319,8 +204,6 @@ var $quicksearch = $('#quicksearch').keyup( debounce( function() {
     updateRangeSlider($this, slideEvt);
   });
 
-
-
   // Look inside element with .filters class for any clicks on elements with .btn
   $('.filters').on( 'click', '.btn', function() {
     var $this = $(this);
@@ -336,7 +219,6 @@ var $quicksearch = $('#quicksearch').keyup( debounce( function() {
     // Trigger isotope again to refresh layout
     $grid.isotope();
   });
-
 
   // change is-checked class on btn-filter to toggle which one is active
   $('.button-group').each( function( i, buttonGroup ) {
@@ -358,8 +240,6 @@ function concatValues( obj ) {
   return value;
 }
 
-
-
 // debounce so filtering doesn't happen every millisecond
 function debounce( fn, threshold ) {
   var timeout;
@@ -375,13 +255,6 @@ function debounce( fn, threshold ) {
   };
 }
 </script>
-<script>
-
-</script>
-
-
-
-
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -392,23 +265,4 @@ function debounce( fn, threshold ) {
     })  
 </script>
 
-<!-- <script type="text/javascript">
-    $( document ).ready(function() {
-        var map = L.map('map').setView([48.69096, 9.14062], 5);
-
-        L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
-        attribution: 'Data, imagery and map information provided by MapQuest, OpenStreetMap <http://www.openstreetmap.org/copyright> and contributors, ODbL <http://wiki.openstreetmap.org/wiki/Legal_FAQ#3a._I_would_like_to_use_OpenStreetMap_maps._How_should_I_credit_you.3F>',
-        maxZoom: 18
-        }).addTo(map);
-
-        {% for x in object.institution.all %} 
-        {% if x.lat %}
-        L.marker([{{ x.lat }}, {{ x.lng }}])
-        .addTo(map)
-        .bindPopup("<h3> {{object.name}}</h3><table class='table table-striped'> <tr> <td>responsible Institution: </td> <td>{{ x.name }}</td> </tr> <tr> <td>located in: </td> <td>{{ x.place.name }} ({{ x.place.part_of.name }})</td> </tr><tr> <td>more projects from this institution: </td> <td><a href='{% url 'browsing:browse_editions' %}?name=&institution__name={{x.name}}'>{{ x.name }}</a></td> </tr>  </table>");
-        {% endif %}
-        {% endfor %}
-        });
-</script> -->
 {% endblock %}
-

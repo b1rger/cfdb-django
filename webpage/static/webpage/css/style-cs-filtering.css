@@ -1,0 +1,143 @@
+/* Application styles for client-side filtering could go here */
+
+.custom-search {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.metadata {
+    position: relative;
+}
+hr {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.grid-item {
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  /*border: 1px solid grey;*/
+  box-shadow: 2px 2px 24px 0 rgba(0, 0, 0, .2);
+  width: calc(90% / 5);
+  margin: 1%;
+  text-align: center;
+}
+.grid-item:hover {
+	box-shadow: 2px 2px 24px 0 rgba(0, 0, 0, .4);
+}
+
+
+@media (min-width: 480px) and (max-width: 768px) {
+
+  .grid-item { width: calc(94% / 2); }
+  .glyph-image { width: 50%; }
+
+}
+@media (max-width: 480px) {
+
+  .grid-item { width: 98%; }
+  .glyph-image { width: 50%; }
+
+
+}
+.sign-image {
+	width: 60%;
+	padding-bottom: 10px;
+
+}
+
+ @media (min-width: 768px) and (max-width: 991.98px) {
+	.sign-image { width: 50%; } 
+ }
+ @media (min-width: 576px) and (max-width: 767.98px)  {
+ 	.sign-image { width: 50%; } 
+ }
+ @media (min-width: 480px) and (max-width: 576px)  {
+ 	.sign-image { width: 70%; } 
+ }
+@media (max-width: 480px) {
+  .sign-image { width: 100%; }
+
+}
+.image-wrapper {
+
+}
+.glyph-image {
+    width: 70%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.glyph-link {
+   /* border-bottom: 1px solid grey;*/
+}
+.glyph-description {
+	font-size: 12px;
+	padding-left: 20px;
+}
+
+.button:hover {
+  background-color: #e7ecef;
+  border-color: #ccc;
+  color: #222;
+
+}
+
+.button:active,
+.button.is-checked {
+  background-color: #007bb4;
+  border-color: #007bb4;
+}
+
+.button.is-checked {
+  color: white;
+  border-color: #007bb4;
+  
+  /*text-shadow: 0 -1px hsla(0, 0%, 0%, 0.8);*/
+}
+
+.button:active, .button.is-checked {
+  /*box-shadow: inset 0 1px 10px hsla(0, 0%, 0%, 0.8);*/
+  border-color: #007bb4;
+
+ 
+}
+.btn-filter {
+	margin-bottom: 10px;
+}
+
+
+#quicksearch {
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 7px 7px 7px 15px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#quicksearch:focus {
+   /* width: 60%;*/
+}
+/* --------------------------------------- */
+/* Bootstrap Slider */
+/* --------------------------------------- */
+.sliders { padding: 15px 0 30px 0; }
+.filter-section .filter-label {
+  display: block;
+  font-weight: bold;
+}
+
+.slider.slider-horizontal {
+ width: 70%;
+}
+
+.bootstrap-slider .slider-selection { background: #2175b0; }
