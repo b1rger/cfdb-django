@@ -1,91 +1,29 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% block Titel %} LaBaSi-Start {% endblock %}
+{% block index-content %}
+<div class="jumbotron text-center" id="index-jumbo">
+<img src="{% static 'webpage/img/labasi_logo.jpg' %}" id="index-image">
+</div>
+{% endblock %}
+
 {% block content %}
 
-    <div class="container text-center">
+   
 
-<!--         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"/>
-                <li data-target="#myCarousel" data-slide-to="1"/>
-                <li data-target="#myCarousel" data-slide-to="2"/>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="{% static 'webpage/img/AD_330A_BM_36761.jpg' %}" alt="First" width="1200" height="700"/>
-                    <div class="carousel-caption">
-                        <h3>Text to come</h3>
-                        <p>more text to come</p>
-                        <p>Credits to come</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="{% static 'webpage/img/YBC_3773_obv.jpg' %}" alt="a nice feature picture" width="1200" height="700"/>
-                    <div class="carousel-caption">
-                        <h3>Text to come</h3>
-                        <p>more text to come</p>
-                        <p>Credits to come</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="{% static 'webpage/img/screenshot1.png' %}" alt="and a even nicer one" width="1200" height="700"/>
-                    <div class="carousel-caption">
-                        <h3>Text to come</h3>
-                        <p>more text to come</p>
-                        <p>Credits to come</p>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"/>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"/>
-            </a>
-        </div> -->
-    </div>
-    <div class="container">
         <h1 class="text-center">LaBaSi</h1>
         <h1 class="text-center">
             <strong>La</strong>te <strong>Ba</strong>bylonian <strong>Si</strong>gns</small>
         </h1>
         <h4 class="text-center">
+
             <i>“Unfortunately, the palaeography of cuneiform was underdeveloped for a long time, and in large measure still remains so".</i>
+
         </h4>
         <p>The above-quoted statement from <i>Dominique Charpin’s</i> commendable <a href="http://www.hup.harvard.edu/catalog.php?isbn=9780674049680">Reading and Writing in Babylon</a> (Harvard University Press: Cambridge, MA and London 2010, p. 78) summarizes very well the curious neglect in Assyriology of a promising field of investigation. Most obviously, a solid knowledge of the development of cuneiform script over time and in different cities is an untapped resource for contextualizing undated tablets. Taking this approach further, establishing handwritings of individual scribes has the potential to further our understanding of the complex administrative realities of the large temple households.</p>
         <p>LaBaSi aims at closing this gap in our knowledge of the Late Babylonian period, loosely defined as the centuries between the demise of Neo-Assyrian supremacy over Babylonia in the seventh century BCE and disappearance of cuneiform script in the first century BCE.</p>
         <p>LaBaSi is an on-line cuneiform sign list that will elucidate the diachronic development of sign forms and will allow, through cumulative evidence, the identification of standard forms as well as of scribal idiosyncrasies. Furthermore, owing to the possibility of multiple cross-referencing, it will allow for the first time an investigation of the interrelation between the several developmental stages of different signs. In this way it will serve as a dynamic and flexible research tool for all on-going investigations in the field of Late Babylonian studies.</p>
         <p>LaBaSi is the outcome of a collaborative effort between the research project Diplomatics and Palaeography of Neo- and Late Babylonian Archival Documents (University of Vienna; funded by the FWF, <a href="http://pf.fwf.ac.at/en/research-in-practice/project-finder/30799">Project No P 26104</a>, <a href="http://homepage.univie.ac.at/michael.jursa/">Michael Jursa</a> (PI), Reinhard Pirngruber, postdoctoral researcher) and the <a href="http://www.oeaw.ac.at/acdh/">Austrian Centre for Digital Humanities</a></p>
-    </div>
-    <div class="container text-center">
-        <h3>Cooperation</h3>
-        <div class="row text-center">
-            <div class="col-md-4">
-                <a href="http://orientalistik.univie.ac.at/" class="navlink" target="_blank">
-                    <img src="{% static 'webpage/img/UNI-Logo_RGB_01.jpg' %}" alt="ifg" width="50%"/>
-                    <p>
-                        <strong>Department of Near Eastern Studies</strong>
-                    </p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-                    <img src="{% static 'webpage/img/logo.png' %}" alt="ACDH" width="25%"/>   
-                    <p>
-                        <strong>Austrian Centre for Digital Humanities</strong>
-                    </p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="https://www.fwf.ac.at/" class="navlink" target="_blank">
-                    <img src="{% static 'webpage/img/fwf-logo_var2.jpg' %}" alt="FWF" width="40%"/>
-                    <p>
-                        <strong>FWF</strong>
-                    </p>
-                </a>
-            </div>
-        </div>
-    </div>
+
 
 {% endblock %}

@@ -4,6 +4,7 @@
 {% block scriptHeader %}<!--leafletjs -->
     <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
     <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
+
         <style>
             #map { height: 500px; }
         </style>
@@ -11,7 +12,7 @@
 {% block content %}
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h2>{{ object.title }} <span id="clickme" title="click to toggle info" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></h2>
+        <h2>{{ object.title }} <span id="clickme" title="click to toggle info" class="glyphicon glyphicon-info-sign" aria-hidden="true"><i class="fa fa-question-circle-o"></i></span></h2>
     </div>
         <div class="panel panel-body">
             <div class="row">
@@ -20,9 +21,9 @@
                         <div class="panel-heading">
                             <h3>Metadata
                                 {% if user.is_authenticated %}
-                                    <a href="{% url 'tablets:tablet_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true" title="edit tablet"></a> | <a href="{% url 'tablets:tablet_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" title="delete tablet" aria-hidden="true"></a>
+                                    <a href="{% url 'tablets:tablet_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true" title="edit tablet"><i class="fa fa-edit"></i></a> | <a href="{% url 'tablets:tablet_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" title="delete tablet" aria-hidden="true"><i class="fa fa-remove"></i></a>
                                 {% endif %}
-                                | <a href="{% url 'tablets:tablet_to_tei' pk=object.id %}" class="glyphicon glyphicon-save" title="download data in XML/TEI" aria-hidden="true"></a>
+                                | <a href="{% url 'tablets:tablet_to_tei' pk=object.id %}" class="glyphicon glyphicon-save" title="download data in XML/TEI" aria-hidden="true"><i class="fa fa-download"></i></a>
 
                             </h3>
                         </div>
@@ -161,7 +162,7 @@
                                             </tr>
                                             <tr>
                                                 <td><small>ID</small></td>
-                                                <td style="text-align:right;"><small><a href="{% url 'tablets:glyph_detail' pk=x.id %}">{{ x.identifier }}</a></small><td>
+                                                <td style="text-align:right;"><small><a href="{% url 'tablets:glyph_detail' pk=x.id %}">{{ x.identifier }}</a></small></td>
                                             </tr>
                                         </table>
                                     </td>
