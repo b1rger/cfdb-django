@@ -1,206 +1,139 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% block Titel %}Tablet - {{ object.title }}{% endblock %}
-{% block scriptHeader %}<!--leafletjs -->
-    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
-    <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
-
-        <style>
-            #map { height: 500px; }
-        </style>
+{% block scriptHeader %}
 {% endblock %}
 {% block content %}
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h2>{{ object.title }} <span id="clickme" title="click to toggle info" class="glyphicon glyphicon-info-sign" aria-hidden="true"><i class="fa fa-question-circle-o"></i></span></h2>
-    </div>
-        <div class="panel panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3>Metadata
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>{{ object.title }}
                                 {% if user.is_authenticated %}
-                                    <a href="{% url 'tablets:tablet_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true" title="edit tablet"><i class="fa fa-edit"></i></a> | <a href="{% url 'tablets:tablet_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" title="delete tablet" aria-hidden="true"><i class="fa fa-remove"></i></a>
+                                    <a href="{% url 'tablets:tablet_edit' pk=object.id %}" title="edit tablet"><i class="fa fa-edit"></i></a> | <a href="{% url 'tablets:tablet_delete' pk=object.id %}" title="delete tablet"><i class="fa fa-remove"></i></a>
                                 {% endif %}
-                                | <a href="{% url 'tablets:tablet_to_tei' pk=object.id %}" class="glyphicon glyphicon-save" title="download data in XML/TEI" aria-hidden="true"><i class="fa fa-download"></i></a>
+                                | <a href="{% url 'tablets:tablet_to_tei' pk=object.id %}" title="download data in XML/TEI"><i class="fa fa-download"></i></a>
 
                             </h3>
                         </div>
-                        <div class="panel panel-body">
-                            <table class="table table-bordered table-hover table-condensed">
+                            <table class="table">
                                 <tr>
-                                    <th class="col-sm-3">Place (Region)</th>
-                                    <td class="readmore col-sm-3"><small></small></td>
-                                    <td class="col-sm-6">
+                                    <th class="w-50">Place (Region)</th>
+                                    <td class="w-50">
                                         <a href="{% url 'browsing:browse_tablets' %}?place={{ object.place.id }}">{{ object.place }} ({{ object.region }})</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Archive</th>
-                                    <td class="readmore"><small></small></td>
+                                   
                                     <td><a href="{% url 'browsing:browse_tablets' %}?archive={{ object.archive.id }}">{{ object.archive }}</a> {{ object.dossier }}</td>
                                 </tr>
                                 <tr>
                                     <th>CDLI no.</th>
-                                    <td class="readmore"><small></small></td>
+                                   
                                     <td>{{ object.cdli_no }}</td>
                                 </tr>
                                 <tr>
                                     <th>NABUCCO no.</th>
-                                    <td class="readmore"><small></small></td>
+                                   
                                     <td>{{ object.nabucco_no }}</td>
                                 </tr>
                                 <tr>
                                     <th>Museum Number</th>
-                                    <td class="readmore"><small></small></td>
+                                    
                                     <td>{{ object.museum_no }}</td>
                                 </tr>
                                 <tr>
                                     <th>Scribe</th>
-                                    <td class="readmore"><small></small></td>
+                                   
                                     <td>
                                         <a href="{% url 'browsing:browse_tablets' %}?scribe={{ object.scribe.id }}">{{ object.scribe }}</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Period | Year | Range</th>
-                                    <td class="readmore"><small></small></td>
+                                    
                                     <td>
                                         <a href="{% url 'browsing:browse_tablets' %}?period={{ object.period.id }}">{{ object.period }}</a> | {{ object.year }} | {{ object.date_not_before }} - {{ object.date_not_after }} (BC)
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Babylonian Date</th>
-                                    <td class="readmore"><small></small></td>
+                                   
                                     <td>{{ object.babyloneian_time }}</td>
                                 </tr>
                                 <tr>
                                     <th>Comment to Date</th>
-                                    <td class="readmore"><small></small></td>
                                     <td>{{ object.date_comment }}</td>
                                 </tr>
                                 <tr>
                                     <th>Ductus</th>
-                                    <td class="readmore"><small></small></td>
                                     <td>{{ object.ductus }}</td>
                                 </tr>
                                 <tr>
                                     <th>Text Type</th>
-                                    <td class="readmore"><small></small></td>
                                     <td>{{ object.text_type }}</td>
                                 </tr>
                                 <tr>
                                     <th>Content</th>
-                                    <td class="readmore"><small></small></td>
                                     <td>{{ object.content }}</td>
                                 </tr>
                                 <tr>
                                     <th>Distinctive Protagonists</th>
-                                    <td class="readmore"><small></small></td>
                                     <td>{{ object.distinctive_protagonists }}</td>
                                 </tr>
                                 <tr>
                                     <th>Bibliography</th>
-                                    <td class="readmore"><small></small></td>
                                     <td>{{ object.bibliography }}</td>
                                 </tr>
                             </table>
-                        </div>
                     </div>
                      {% if user.is_authenticated %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
+                     <br>
+                        <div class="card">
+                            <div class="card-header">
                                 <h3>{{ images }} Images</h3>
                             </div>
-                            <div class="panel panel-body">
-                                <table class="table table-bordered table-hover table-condensed">
+                            
+                                <table class="table">
                                     {% for x in img_list %}
                                     <tr>
-                                        <td><img src="{% url 'protected_server' pic=x.filename %}" width="100"></td>
-                                        <td>
+                                        <td class="w-50"><img src="{% url 'protected_server' pic=x.filename %}" width="100"></td>
+                                        <td class="w-50">
                                         {{ x.comment }}<br/>
                                             {% if user.is_authenticated %}
-                                            <a href="{% url 'tablets:tabletimg_detail' pk=x.id %}" class="glyphicon glyphicon-new-window
-" aria-hidden="true"></a>
+                                            <a href="{% url 'tablets:tabletimg_detail' pk=x.id %}"><i class="fa fa-external-link"></i></a>
                                             {% endif %}
                                         </td>
                                     </tr>
                                     {% endfor %}
                                 </table>
-                            </div>
                         </div>
                     {% endif %}
                 </div>
                 <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card">
+                        <div class="card-header">
                             <h3>{{ glyphs }} Glyphs</h3>
                         </div>
-                        <div class="panel panel-body">
-                            <table class="table table-bordered table-hover table-condensed">
-                                {% for x in glyph_list %}
-                                <tr>
-                                    <td style="text-align:center;"><img src="/media/glyph_img/{{ x.filename }}" width="100"></td>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <td><small>Sign</small></td>
-                                                <td class="signType"  style="text-align:right;">{{ x.sign }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><small>Reading</small></td>
-                                                <td style="text-align:right;">{{ x.reading }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><small>Context</small></td>
-                                                <td style="text-align:right;">{{ x.context }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><small>note</small></td>
-                                                <td style="text-align:right;">{{ x.note }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><small>ID</small></td>
-                                                <td style="text-align:right;"><small><a href="{% url 'tablets:glyph_detail' pk=x.id %}">{{ x.identifier }}</a></small></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
+                            <table class="table table-hover">
+                            {% for x in glyph_list %}
+                            <tr>
+                            <td class="w-40" style="text-align:center;">
+                                <img src="/media/glyph_img/{{ x.filename }}" width="100">
+                            </td>
+                            <td class="w-60">
+                                <p><b>Sign:</b> {{ x.sign }}<br>
+                                <b>Reading:</b> {{ x.reading }}<br>
+                                <b>Context:</b> {{ x.context }}<br>
+                                <b>Note:</b> {{ x.note }}<br>
+                                <b>ID:</b> <a href="{% url 'tablets:glyph_detail' pk=x.id %}">{{ x.identifier }}</a><br>    
+                                </p>
+                            </td>
+                            </tr>
+                            {% endfor %}
+                            </table>                        
                     </div>
                 </div>
             </div>
-        </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $( "td[class~='readmore']" ).hide();
-    })
-    $("#clickme").click(function(){
-        $( "td[class~='readmore']" ).toggle("slow");
-    })
-</script>
-
-<!-- <script type="text/javascript">
-    $( document ).ready(function() {
-        var map = L.map('map').setView([48.69096, 9.14062], 5);
-
-        L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
-        attribution: 'Data, imagery and map information provided by MapQuest, OpenStreetMap <http://www.openstreetmap.org/copyright> and contributors, ODbL <http://wiki.openstreetmap.org/wiki/Legal_FAQ#3a._I_would_like_to_use_OpenStreetMap_maps._How_should_I_credit_you.3F>',
-        maxZoom: 18
-        }).addTo(map);
-
-        {% for x in object.institution.all %}
-        {% if x.lat %}
-        L.marker([{{ x.lat }}, {{ x.lng }}])
-        .addTo(map)
-        .bindPopup("<h3> {{object.name}}</h3><table class='table table-striped'> <tr> <td>responsible Institution: </td> <td>{{ x.name }}</td> </tr> <tr> <td>located in: </td> <td>{{ x.place.name }} ({{ x.place.part_of.name }})</td> </tr><tr> <td>more projects from this institution: </td> <td><a href='{% url 'browsing:browse_editions' %}?name=&institution__name={{x.name}}'>{{ x.name }}</a></td> </tr>  </table>");
-        {% endif %}
-        {% endfor %}
-        });
-</script> -->
 {% endblock %}
