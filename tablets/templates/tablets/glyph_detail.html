@@ -1,107 +1,61 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% block Titel %}Glyph - {{ object.sign }}{% endblock %}
-{% block scriptHeader %}<!--leafletjs -->
-    <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
-    <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
-        <style>
-            #map { height: 500px; }
-        </style>
+{% block scriptHeader %}
+  
 {% endblock %}
 {% block content %}
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h2><abbr title="ID: {{ object.identifier }}">{{ object.sign }}</abbr><span id="clickme" title="click to toggle info" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></h2>
+<div class="card">
+    <div class="card-header">
+        <h2><abbr title="ID: {{ object.identifier }}">{{ object.sign }}</abbr></h2>
     </div>
-        <div class="panel panel-body">
+        <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card">
+                        <div class="card-header">
                             <h3>Metadata
                                 {% if user.is_authenticated %}
-                                    <a href="{% url 'tablets:glyph_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true"></a> | <a href="{% url 'tablets:glyph_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></a>
+                                    <a href="{% url 'tablets:glyph_edit' pk=object.id %}" title="edit tablet"><i class="fa fa-edit"></i></a> | <a href="{% url 'tablets:glyph_delete' pk=object.id %}" title="delete tablet"><i class="fa fa-remove"></i></a>
                                 {% endif %}
                             </h3>
                         </div>
-                        <div class="panel panel-body">
+                       
                             <div style="text-align:center; padding:20px;">
                                 <img src="/media/glyph_img/{{ object.filename }}" width="300">
                             </div>
-                            <table class="table table-bordered table-hover table-condensed">
+                            <table class="table">
                                 <tr>
-                                    <th class="col-sm-3">Tablet</th>
-                                    <td class="readmore col-sm-3"><small></small></td>
-                                    <td class="col-sm-6"><a href="{% url 'tablets:tablet_detail' pk=object.tablet.id %}">{{ object.tablet }}</a></td>
+                                    <th>Tablet</th>
+                                    <td><a href="{% url 'tablets:tablet_detail' pk=object.tablet.id %}">{{ object.tablet }}</a></td>
                                 </tr>
                                 <tr>
                                     <th>Reading</th>
-                                    <td class="readmore"><small></small></td>
                                     <td>{{ object.reading }}</td>
                                 </tr>
                                 <tr>
                                     <th>Context</th>
-                                    <td class="readmore"><small></small></td>
                                     <td>{{ object.context }}</td>
                                 </tr>
                                 <tr>
                                     <th>Notes</th>
-                                    <td class="readmore"><small></small></td>
                                     <td>{{ object.note }}</td>
                                 </tr>
                             </table>
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card">
+                        <div class="card-header">
                             <h3><a href="{% url 'tablets:sign_detail' pk=object.sign.id %}">{{ object.sign.sign_name}} (<abbr title="ABZ Number">{{ object.sign.abz_number }}</abbr>)</a></h3>
                         </div>
-                        <div class="panel panel-body">
-                            <table class="table table-hover" >
-                                <tr>
-                                    <th style="text-align:center">early</th>
-<!--                                     <th style="text-align:center">late</th> -->
-                                </tr>
-                                <tr style="text-align:center">
-                                    <td><img src="/media/sign_img/{{ object.sign.image1_name }}" width="100"></td>
-<!--                                     <td><img src="/media/sign_img/{{ object.sign.image2_name }}" width="100"></td>
- -->                                </tr>
-                            </table>
+                        <div class="card-body text-center">
+                            <h4>early</h4>
+                            <img src="/media/sign_img/{{ object.sign.image1_name }}">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $( "td[class~='readmore']" ).hide();
-    })
-    $("#clickme").click(function(){
-        $( "td[class~='readmore']" ).toggle("slow");
-    })  
-</script>
-
-<!-- <script type="text/javascript">
-    $( document ).ready(function() {
-        var map = L.map('map').setView([48.69096, 9.14062], 5);
-
-        L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
-        attribution: 'Data, imagery and map information provided by MapQuest, OpenStreetMap <http://www.openstreetmap.org/copyright> and contributors, ODbL <http://wiki.openstreetmap.org/wiki/Legal_FAQ#3a._I_would_like_to_use_OpenStreetMap_maps._How_should_I_credit_you.3F>',
-        maxZoom: 18
-        }).addTo(map);
-
-        {% for x in object.institution.all %} 
-        {% if x.lat %}
-        L.marker([{{ x.lat }}, {{ x.lng }}])
-        .addTo(map)
-        .bindPopup("<h3> {{object.name}}</h3><table class='table table-striped'> <tr> <td>responsible Institution: </td> <td>{{ x.name }}</td> </tr> <tr> <td>located in: </td> <td>{{ x.place.name }} ({{ x.place.part_of.name }})</td> </tr><tr> <td>more projects from this institution: </td> <td><a href='{% url 'browsing:browse_editions' %}?name=&institution__name={{x.name}}'>{{ x.name }}</a></td> </tr>  </table>");
-        {% endif %}
-        {% endfor %}
-        });
-</script> -->
 {% endblock %}
-

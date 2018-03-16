@@ -88,22 +88,26 @@ hr {
 
 .button:active,
 .button.is-checked {
-  background-color: #007bb4;
-  border-color: #007bb4;
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
 .button.is-checked {
   color: white;
-  border-color: #007bb4;
+  border-color: #007bff;
   
   /*text-shadow: 0 -1px hsla(0, 0%, 0%, 0.8);*/
 }
 
 .button:active, .button.is-checked {
   /*box-shadow: inset 0 1px 10px hsla(0, 0%, 0%, 0.8);*/
-  border-color: #007bb4;
+  border-color: #007bff;
 
  
+}
+
+.slider-selection, .slider-handle {
+ color: #007bff;
 }
 .btn-filter {
 	margin-bottom: 10px;
@@ -140,4 +144,11 @@ hr {
  width: 70%;
 }
 
-.bootstrap-slider .slider-selection { background: #2175b0; }
+.bootstrap-slider .slider-selection {
+  background: #2175b0;
+  background-color: #007bff;
+}
+.bootstrap-slider .slider-handle {
+  background-image: none;
+  background-color: #007bff;
+}

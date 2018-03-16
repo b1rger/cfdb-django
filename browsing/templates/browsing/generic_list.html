@@ -1,22 +1,36 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
+{% load django_tables2 %}
+{% load i18n %}
 {% block Titel %} {% endblock %}
 {% block scriptHeader %}
 <!-- <link rel="stylesheet" type="text/css" href="{% static 'webpage/libraries/jquery.autocomplete/jquery.autocomplete.css' %}"/>
 <script src="{% static 'webpage/libraries/jquery.autocomplete/jquery.autocomplete.js' %}"></script> -->
 {% endblock %}
 {% block content %}
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+var fetchedParameter = "{{ table.page.number }}";
+$("#goto option").each(function() {
+    if($(this).text() == fetchedParameter) {
+        $(this).attr('selected', 'selected');
+    }
+});
+
+});
+</script>
+
 <div class="container">
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card">
+    <div class="card-header" style="color: #ffffff; background-color: #424242;">
     
-        <h1>{% block list_title %}{% endblock %}</h1>
-    
-    {% block create_button %}
-        
+        <h3>{% block list_title %}{% endblock %}</h3>
+    {% block create_button %}    
     {% endblock %}
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         <div class="row">
             <div class="col-md-4">
                 {% load django_tables2 crispy_forms_tags %}
@@ -24,12 +38,32 @@
                 {% block reset_button %}
                 {% endblock %}
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 table-responsive">
+            {% with table.paginator.count as total %}
+                <legend>Total results: {{ total }}</legend>
+                <p style="margin-bottom: 30px;">
+                <i class="fa fa-question-circle-o"></i> Sort results by clicking on column header
+                </p>
+                {% endwith %}
                 {% render_table table %}
+
+                <!--select form if more than 15 pages -->
+                {% if table.page.has_next %}
+
+                <div class="form-group">
+                  <label for="goto">Go to page</label>
+                    <select class="form-control" id="goto" onchange="javascript:location.href = this.value;" style="width: 100px;">
+                        {% for p in table.paginator.page_range %}
+                            <option value="{% querystring table.prefixed_page_field=p %}">{{ p }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 </div>
+
 {% block customScripts %}{% endblock %}
 {% endblock %}

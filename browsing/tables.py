@@ -55,4 +55,5 @@ class TabletImageTable(tables.Table):
 
     class Meta:
         model = TabletImage
+        exclude = ['comment']
         attrs = {"class": "table table-hover table-striped table-condensed"}

@@ -20,6 +20,7 @@ header {
 
 .main-content {
     flex: 1 0 auto;
+    padding-top: 10px;
 }
 
 footer {
@@ -69,5 +70,23 @@ footer {
 #index-image {
     width: 40%;
 }
+.table {
+    /*border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;*/
 
+}
+.pagination .cardinality {
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+.pagination .previous,  .pagination .next {
+
+   /* padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #007bff;*/
+}
+.cs-filter-label {
+   /* margin-right: 20px;*/
+}
 

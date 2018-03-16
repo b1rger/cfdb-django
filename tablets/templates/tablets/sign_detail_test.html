@@ -33,15 +33,15 @@
 
 <!--Metadata block -->
 
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card">
+    <div class="card-header">
         <h3><b>{{ object.sign_name }}</b> (<abbr title="ABZ Number">{{ object.abz_number }}</abbr>)
                                 {% if user.is_authenticated %}
-            <a href="{% url 'tablets:sign_edit' pk=object.id %}" class="glyphicon glyphicon-edit" aria-hidden="true" title="edit Sign"></a> | <a href="{% url 'tablets:sign_delete' pk=object.id %}" class="glyphicon glyphicon-remove-circle" aria-hidden="true" title="delete Sign"></a>
+            <a href="{% url 'tablets:sign_edit' pk=object.id %}" title="edit sign"><i class="fa fa-edit"></i></a> | <a href="{% url 'tablets:sign_delete' pk=object.id %}" title="delete Sign"><i class="fa fa-remove"></i></a>
                    {% endif %}
         </h3>
     </div>
-    <div class="panel-body" style="text-align:center; padding:20px;">
+    <div class="card-body" style="text-align:center;">
       <div class="row">
         <div class="col-md-4">
        <img src="/media/sign_img/{{ object.image1_name }}" class="sign-image"/>
@@ -55,26 +55,26 @@
             <div class="filters" id="filters">
 
                 <div class="button-group" data-filter-group="region">
-                    <p>Filter by Regions
-                    <button class="button btn btn-default btn-filter is-checked" data-filter="">show all</button>
+                    <p><b class="cs-filter-label">Filter by Region</b></p>
+                    <p><button class="button btn btn-outline-secondary btn-filter is-checked" data-filter="">show all</button>
                     {% for x in region_list %}
-                    <button class="button btn btn-default btn-filter" data-filter=".{{x.get_slug_name}}">{{x}}</button>
+                    <button class="button btn btn-outline-secondary btn-filter" data-filter=".{{x.get_slug_name}}">{{x}}</button>
                     {% endfor %}
                     </p>
                 </div>
 
                 <div class="button-group" data-filter-group="period">
-                    <p>Filter by Periods
-                    <button class="button btn btn-default btn-filter is-checked" data-filter="">show all</button>
+                    <p><b class="cs-filter-label">Filter by Period</b></p>
+                    <p><button class="button btn btn-outline-secondary btn-filter is-checked" data-filter="">show all</button>
                     {% for x in period_list %}
-                    <button class="button btn btn-default btn-filter" data-filter=".{{x}}">{{x}}</button>
+                    <button class="button btn btn-outline-secondary btn-filter" data-filter=".{{x}}">{{x}}</button>
                     {% endfor %}
                     </p>    
                 </div>              
             </div>
             <div class="sliders">
                     <div class="bootstrap-slider">
-                      <p class="filter-label">Filter by Year Range: <span class="filter-selection"></span></p>
+                      <p class="filter-label cs-filter-label"><b>Filter by Date</b> <span class="filter-selection"></span></p>
                       <b class="filter-min">800 BC</b> &nbsp;&nbsp;&nbsp;
                       <input id="filter-year" type="text" class="bootstrap-slider" value="" data-filter-group="year">&nbsp;&nbsp;&nbsp;
                       <b class="filter-max">0 BC</b>
@@ -129,10 +129,8 @@ $('.grid').isotope({
 });
 
 });
-
 //add here till debounce
 $(document).ready( function() {
-
   // Create object to store filter for each group
   var buttonFilters = {};
   var buttonFilter = '*';
@@ -143,7 +141,6 @@ $(document).ready( function() {
     };
   // quick search regex
   var qsRegex;
-
   // Initialise Isotope
   // Set the item selector
   var $grid = $('.grid').isotope({
@@ -165,12 +162,9 @@ var $quicksearch = $('#quicksearch').keyup( debounce( function() {
   qsRegex = new RegExp( $quicksearch.val(), 'gi' );
   $grid.isotope();
 }) );
-
-
   // Initialise Sliders
   // Set min/max range on sliders as well as default values
   var $yearSlider = $('#filter-year').slider({ tooltip_split: true, min: 0,  max: 800, range: true, value: [0, 800], reversed: true });
-
   function updateRangeSlider(slider, slideEvt) {
     console.log('Current slider:' + slider);
     var sldmin = +slideEvt.value[0],
@@ -197,7 +191,6 @@ var $quicksearch = $('#quicksearch').keyup( debounce( function() {
       $grid.isotope();
 
   }
-
   // Trigger Isotope Filter when slider drag has stopped
   $yearSlider.on('slideStop', function(slideEvt){
     var $this =$(this);
@@ -230,7 +223,6 @@ var $quicksearch = $('#quicksearch').keyup( debounce( function() {
   });
 
 });
-
 // Flatten object by concatting values
 function concatValues( obj ) {
   var value = '';
@@ -239,7 +231,6 @@ function concatValues( obj ) {
   }
   return value;
 }
-
 // debounce so filtering doesn't happen every millisecond
 function debounce( fn, threshold ) {
   var timeout;
@@ -255,7 +246,6 @@ function debounce( fn, threshold ) {
   };
 }
 </script>
-
 <script type="text/javascript">
     $(document).ready(function(){
         $( "td[class~='readmore']" ).hide();
@@ -264,5 +254,4 @@ function debounce( fn, threshold ) {
         $( "td[class~='readmore']" ).toggle("slow");
     })  
 </script>
-
 {% endblock %}

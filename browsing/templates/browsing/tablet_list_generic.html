@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block reset_button %}
-<a class ="btn btn-default"  id="01">Show/Hide Advanced search options</a></br>
+<button type="button" class="btn btn-outline-secondary" id="01">Show/Hide advanced search options</button>
  <p></p>
- <a class ="btn btn-default"  href="{% url 'browsing:browse_tablets' %}">Reset search</a>     
+ <a class="btn btn-outline-secondary"  href="{% url 'browsing:browse_tablets' %}">Reset search</a>  
 {% endblock %}
 
 {% block customScripts %}

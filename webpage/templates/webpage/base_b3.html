@@ -11,7 +11,7 @@
       {% endblock %}
       <meta name="author" content="{{ metadata.author }}">
       <!-- Bootstrap -->
-      <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap400/css/bootstrap.min.css' %}"/></link>
+      <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap337/css/bootstrap.min.css' %}"/></link>
 
       <!--scroll to top CSS -->
       <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
@@ -21,8 +21,6 @@
       <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}"/></link>
       <!--scroll to top -->
         <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
-      <!--font awesome-->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <!-- Piwik -->
         <script type="text/javascript">
             var _paq = _paq || [];
@@ -54,67 +52,94 @@
 
   <body role="document">
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-     
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-             <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <!-- <div class="container"> -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation!</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>  
+        <!-- </div> -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About
                   <span class="caret"/>
                   </a>
-                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'webpage:template' template='about' %}">About project</a>
-                    <a class="dropdown-item" href="{% url 'webpage:template' template='docu' %}">Documentation</a>
-                    <a class="dropdown-item" href="{% url 'webpage:template' template='imprint' %}">Imprint | Impressum</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse the Data
+                  <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'webpage:template' template='about' %}">About project</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'webpage:template' template='docu' %}">Documentation</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'webpage:template' template='imprint' %}">Imprint | Impressum</a>
+                    </li>
+                  </ul>
+                </li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse the Data
                   <span class="caret"/>
                   </a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'browsing:browse_tablets' %}">Browse Tablets</a>
-                    <a class="dropdown-item" href="{% url 'browsing:browse_glyphs' %}">Browse Glyphs</a>
-                    <a class="dropdown-item" href="{% url 'browsing:browse_signs' %}">Browse Standardsigns</a>
-                    {% if user.is_authenticated %}                      
-                          <a class="dropdown-item" href="{% url 'browsing:browse_tabletimages' %}">Browse Tablet Images</a>
+                  <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'browsing:browse_tablets' %}">Browse Tablets</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'browsing:browse_glyphs' %}">Browse Glyphs</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'browsing:browse_signs' %}">Browse Standardsigns</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                      <li>
+                          <a href="{% url 'browsing:browse_tabletimages' %}">Browse Tablet Images</a>
+                      </li>
                     {% endif %}
-                  </div>
+                  </ul>
               </li>
-                             
-                        <a class="nav-item nav-link" href="{% url 'charts:bar_charts' %}">Charts</a>
-              
-                             
-                        <a class="nav-item nav-link" href="{% url 'api-root' %}"">API</a>
-              
-              </ul>
-            
-            <ul class="navbar-nav ml-auto">
-                    
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analyze the Data
+                  <span class="caret"/>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'charts:bar_charts' %}">Bar Charts</a>
+                    </li>
+                  </ul>
+              </li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Get the Data
+                  <span class="caret"/>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'api-root' %}">JSON</a>
+                    </li>
+                  </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="padding-right: 15px;">
+                    <li class="dropdown">
                         {% if user.is_authenticated %}
-                        <li class="nav-item dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                 {{ user.get_username }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="nav-link" href="{% url 'webpage:user_logout' %}">Log Out</a>
-                            </div>
-                          </li>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'webpage:user_logout' %}">Log Out</a></li>
+                            </ul>
                         {% else %}
-                        <li class="nav-item">
-                                <a class="nav-link" href="{% url 'webpage:user_login' %}">Log In</a>
-                         </li>  
+                        
+                                <a href="{% url 'webpage:user_login' %}">Log In</a>
+                           
                         {% endif %}
-                    
+                    </li>
                 </ul>
         </div>
     </nav>
