@@ -2,37 +2,24 @@
 {% load staticfiles %}
 {% block Titel %} LaBaSi-About {% endblock %}
 {% block content %}
-<div class="container text-center">
-        <h2>
-            <small>about</small>
-        </h2>
-        <h2 class="bs-docs-featurette-title">Late Babylonian Signs (LaBaSi)</h2>
-        <ul class="nav nav-tabs nav-justified">
-            <li class="active">
-                <a data-toggle="pill" href="#project" style="color:#686868 ">Project</a>
-            </li>
-            <li>
-                <a data-toggle="pill" href="#texts" style="color:#686868 ">Text &amp; Archives</a>
-            </li>
-            <li>
-                <a data-toggle="pill" href="#team" style="color:#484848">Team</a>
-            </li>
-            <li>
-                <a data-toggle="pill" href="#contact" style="color:#484848">Contact</a>
-            </li>
-            <li>
-                <a data-toggle="pill" href="#publications" style="color:#484848">Publications &amp; Workingpapers</a>
-            </li>
-            <li>
-                <a data-toggle="pill" href="#links" style="color:#484848">Links</a>
-            </li>
-        </ul>
-        <div class="tab-content" style="text-align:justify">
-            <div id="project" class="tab-pane fade in active row">
-                <div class="col-md-10">
-                    <h4>
-                        <small>Project Description</small>
-                    </h4>
+<div class="container">
+        <h1 class="bs-docs-featurette-title text-center">About Late Babylonian Signs (LaBaSi)</h1>
+        <br>
+        
+<nav>
+  <div class="nav nav-tabs nav-justified flex-column flex-sm-row" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active flex-sm-fill" id="nav-project-tab" data-toggle="tab" href="#nav-project" role="tab" aria-controls="nav-project" aria-selected="true">Project</a>
+    <a class="nav-item nav-link flex-sm-fill" id="nav-texts-tab" data-toggle="tab" href="#nav-texts" role="tab" aria-controls="nav-texts" aria-selected="false">Text &amp; Archives</a>
+    <a class="nav-item nav-link flex-sm-fill" id="nav-team-tab" data-toggle="tab" href="#nav-team" role="tab" aria-controls="nav-team" aria-selected="false">Team</a>
+    <a class="nav-item nav-link flex-sm-fill" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="true">Contact</a>
+    <a class="nav-item nav-link flex-sm-fill" id="nav-publications-tab" data-toggle="tab" href="#nav-publications" role="tab" aria-controls="nav-publications" aria-selected="false">Publications</a>
+    <a class="nav-item nav-link flex-sm-fill" id="nav-links-tab" data-toggle="tab" href="#nav-links" role="tab" aria-controls="nav-links" aria-selected="false">Links</a>
+  </div>
+</nav>
+        <div class="tab-content" style="text-align:justify; padding-top: 30px;" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-project" role="tabpanel" aria-labelledby="nav-project-tab">
+           
+                <div>
                     <h3 style="text-align:center;">Introduction to LaBaSi</h3>
                     <p style="text-align:right">by <strong>
                             <a href="http://univie.academia.edu/ReinhardPirngruber">Reinhard Pirngruber</a>
@@ -82,18 +69,24 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-2" style="text-align:center">
-                    <h3>Funded by</h3>
-                    <a href="https://www.fwf.ac.at/" class="navlink" target="_blank">
-                        <img src="{% static 'webpage/img/fwf-logo_var2.jpg' %}" alt="FWF" width="100%"/>
+                <div>
+                    <h4>Funded by</h4>
+                    <div class="row text-center">
+                    <div class="col-sm-6">
+                    <a href="https://www.fwf.ac.at/" class="navlink">
+                        <img src="{% static 'webpage/img/fwf-logo_var2.jpg' %}" alt="FWF" style="padding: 20px;" width="50%"/>
                     </a>
-                    <hr/>
-                    <a href="http://www.oeaw.ac.at/" class="thumbnail" class="navlink" target="_blank">
-                        <img src="{% static 'webpage/img/OEAW_en_Logo_cmyk_text.jpg' %}" alt="OeAW-Logo" width="100%" />
+                    </div>
+                    <div class="col-sm-6">
+                    <a href="http://www.oeaw.ac.at/" class="navlink">
+                        <img src="{% static 'webpage/img/OEAW_en_Logo_cmyk_text.jpg' %}" alt="OeAW-Logo" style="padding: 20px;" width="50%" />
                     </a>
+                    </div>
+                    </div>
                 </div>
+                
             </div>
-            <div id="texts" class="tab-pane fade">
+            <div class="tab-pane fade" id="nav-texts" role="tabpanel" aria-labelledby="nav-texts-tab">
                 <h3 style="text-align:center;">Texts and archives</h3>
                 <p style="text-align:right">by <strong>
                         <a href="http://univie.academia.edu/ReinhardPirngruber">Reinhard Pirngruber</a>
@@ -107,7 +100,7 @@
                 <p>It has been pointed out above that the documentation at our disposal diminishes significantly after 484 BCE. However, the distinctions between temple and private archives, and in the latter category between entrepreneur and rentier type archives, remain useful heuristic tool. For example, among the tablets found in the Seleucid strata of the Rēš temple in Uruk is a large number of sales of (and service contracts pertaining to) prebends and (mostly urban) real estate, involving the old-established urban elites. The archive of Murašû family from Nippur dating to the last quarter of the fifth century BCE documents the activities of a family of entrepreneurs in rural Babylonia in the Late Achaemenid period. Another relevant archive of this period to be mentioned is the Esangila archive from the city of Babylon, which provides insights into the running of Babylonian temples under first Persian and later Greek overlords.</p>
                 <p>It is also the libraries of the Esangila to provide us with the second category of text used for this palaeographic database, namely the Astronomical Diaries. These texts are a set of cuneiform tablets recording a variety of observed celestial, climatic, ecological, and economic phenomena, as well as giving accounts of historical events. They comprise the largest collections of observational data available from the Ancient World, consisting of hundreds of tablets dating from ca. 650 – 60 BCE. They have typically been studied by historians of astronomy and economists with a focus on factual content but often disregarding the extrinsic aspects of the tablets themselves. Owing to their coherence and to the fact that a large number of these texts dates to the final centuries of the first millennium, i.e., to a period in which there is a dearth of archival sources, they are a repository of palaeographic information that is still largely untapped.</p>
             </div>
-            <div id="team" class="tab-pane fade">
+            <div class="tab-pane fade" id="nav-team" role="tabpanel" aria-labelledby="nav-team-tab">
                 <h3>Department of Near Eastern Studies</h3>
                 <p>Project leaders: <a href="http://homepage.univie.ac.at/michael.jursa/">Michael Jursa</a>, <a href="http://orientalistik.univie.ac.at/ueber-uns/">Reinhard Pirngruber</a>
                 </p>
@@ -119,7 +112,7 @@
                 <p>Assistent Developer(s): <a href="http://www.oeaw.ac.at/acdh/de/andorfer">Peter Andorfer</a>
                 </p>
             </div>
-            <div id="contact" class="tab-pane fade">
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <address>
                     <h3>Department of Oriental Studies - University of Vienna</h3>
                                 Spitalgasse 2, Hof 4<br/>
@@ -137,14 +130,10 @@
                                 Website: <a href="https://acdh.oeaw.ac.at/acdh/en">https://acdh.oeaw.ac.at/acdh</a>
                 </address>
             </div>
-            <div id="publications" class="tab-pane fade">
-                <ul>
-                    <li>soon</li>
-                    <li>to</li>
-                    <li>come</li>
-                </ul>
+            <div class="tab-pane fade" id="nav-publications" role="tabpanel" aria-labelledby="nav-publications-tab">
+                <p>Coming soon</p>
             </div>
-            <div id="links" class="tab-pane fade">
+            <div class="tab-pane fade" id="nav-links" role="tabpanel" aria-labelledby="nav-links-tab">
                 <ul>
                     <li>
                         <a href="http://cuneiform.de/">cuneiform.de</a>

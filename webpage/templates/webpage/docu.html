@@ -3,30 +3,9 @@
 {% block Titel %} Documentation {% endblock %}
 {% block content %}
 <div class="container">
-        <h2 style="text-align:center;">
-            <small>documentation</small>
-        </h2>
-        <div class="row">
-            <div class="col-md-3">
-                <h2>Table of Content</h2>
-                <ul>
-                    <li>
-                        <a href="#How to navigate LaBaSi" class="wiki-anchor">How to navigate LaBaSi</a>
-                    </li>
-                    <li>
-                        <a href="#Technical documentation" class="wiki-anchor">Technical documentation</a>
-                    </li>
-                    <li>
-                        <a href="#Data Model" class="wiki-anchor">Data Model</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-9">
-                <h1>
-                    <a name="How to navigate LaBaSi"></a>
-                    How to navigate LaBaSi
-                </h1>
+                <h1 class="text-center">Documentation</h1>
                 <div>
+                <h2 class="text-center">How to navigate LaBaSi</h2>
                     <p>
                         The most basic function of LaBaSi is that of a sign list organized around standardized drawings of graphemes. Under <strong>Browse the Data &rarr; <a href="{% url 'browsing:browse_signs' %}">Browse Standard Signs</a></strong>, users are able to look up more than 230 standard signs and their actual attestations as extracted from tablet photographs.<br/>
                         Each standard signs is coded with their number in <a href="https://de.wikipedia.org/wiki/Rykle_Borger">Rykle Borger’s</a> signs lists (ABZ and MesZL). <br/>
@@ -65,16 +44,12 @@
                         Additionally, also the tablet’s scribe (if indicated), the overall text genre (i.e. letter, type of administrative or legal document, historiographic text, etc.) and a minimal bibliography for published texts are provided. The search function of LaBaSi is not confined to <i>Standard Signs</i>. For those interested in particular handwritings, it is also possible to search for specific tablets under <strong>Browse Data &rarr; <a href="{% url 'browsing:browse_tablets' %}">Brows tablets</a></strong> or to simply <strong><a href="{% url 'browsing:browse_glyphs' %}">browse through glyphs</a></strong>. 
                     </p>
                 </div>
-                <h1>
-                    <a name="Technical documentation"></a>Technical documentation
-                </h1>
                 <div>
+                <h2 class="text-center">Technical description</h2>
                     <p>
                         The LaBaSi Application is based on <a href="https://www.djangoproject.com/">django</a>, <i>The web framework for perfectionists with deadlines</i> and uses a <a href="https://www.mysql.com/">MySQL data base</a> as storage unit. Client side scripting is mostly done with <a href="https://jquery.com/">jQuery</a>. The <a href="{% url 'charts:bar_charts' %}">charts</a> were realized with <a href="http://www.highcharts.com/">Highcharts</a>.<br/>
                         The application's code is available on <a href="https://github.com/acdh-oeaw/cfdb-django">GitHub.<a>
                     </p>
                 </div>             
-            </div>
-        </div>
     </div>
 {% endblock %}

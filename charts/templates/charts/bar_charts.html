@@ -10,7 +10,12 @@
     <!--highcharts END -->
 {% endblock %}
 {% block content %}
-    <div style="text-align:right">
+    
+    <div>
+        <h1>Charts<br><i class="text-muted" style="font-size: 16px;">Please select an option to be visualized</i></h1>
+        
+    </div>
+    <div>
         <select id="chartselector">
             <option value="---">---</option>
             <option value="{% url 'charts:tablets_per_region' %}">Tablets per Region</option>
@@ -18,9 +23,6 @@
             <option value="{% url 'charts:tablets_per_scribe' %}">Tablets per Scribe</option>
             <option value="{% url 'charts:glyphs_per_sign' %}">Glyphs per Sign</option>
         </select>
-    </div>
-    <div>
-        <h1>Please - make a selection</h1>
     </div>
     <div id="container" style="min-width: 300px; height: 700px; margin: 0 auto"/>
     
