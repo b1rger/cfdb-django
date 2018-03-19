@@ -155,7 +155,7 @@ class GlyphDelete(DeleteView):
 
 class SignDetailView(DetailView):
     model = Sign
-    template_name = 'tablets/sign_detail_test.html'
+    template_name = 'tablets/sign_detail.html'
 
     def get_context_data(self, **kwargs):
         current_object = self.object
