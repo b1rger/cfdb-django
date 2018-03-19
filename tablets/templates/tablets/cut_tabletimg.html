@@ -11,18 +11,18 @@
     </style>
 {% endblock %}
 {% block content %}
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card">
+    <div class="card-header">
         <h2>Cut some Glyphs from <a href="{% url 'tablets:tablet_detail' pk=object.tablet.id %}">{{ object.tablet }}</a></h2>
     </div>
-        <div class="panel panel-body">
+        <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card">
+                        <div class="card-header">
                             Metadata
                         </div>
-                        <div class="panel panel-body">
+                        <div class="card-body">
                             {% crispy form %}
                             <hr/>
                             <div class="btn-group btn-group-crop">
@@ -34,9 +34,9 @@
                     </div>
                 </div>                
                 <div class="col-md-10">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Cut & go</div>
-                        <div class="panel panel-body">
+                    <div class="card">
+                        <div class="card-header">Cut & go</div>
+                        <div class="card-body">
                             <div>
                                 <img id="image" src="/media/tablet_img/{{ object.filename }}">
                             </div>
@@ -45,11 +45,12 @@
                 </div>
                 
             </div>
-                <div class="panel panel-default">
-                    <div class="panel panel-heading">
+            <br>
+                <div class="card">
+                    <div class="card-header">
                         Glyphs
                     </div>
-                    <div class="panel panel-body">
+                    <div class="card-body">
                         <div id="show-glyphs">
                             <table class="table table-hover table-striped table-condensed">
                                 <tr>

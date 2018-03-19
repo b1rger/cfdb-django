@@ -1,5 +1,5 @@
 import uuid
-from slugify import slugify
+from django.utils.text import slugify
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required

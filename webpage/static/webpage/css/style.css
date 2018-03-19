@@ -33,11 +33,11 @@ footer {
     background-color: #f8f8f8;
     /*background-color: #ffffff;*/
 }
-.navbar-default {
+.navbar {
    /* background-color: #ffffff;
     border-bottom: 0px;*/
-   /* font-weight: 800;
-    font-size: 18px;*/
+    font-weight: 700;
+
 }
 /*.dropdown-menu li a {
     font-weight: 600;
@@ -68,7 +68,7 @@ footer {
     padding-bottom: 10px;
 }
 #index-image {
-    width: 40%;
+    width: 50%;
 }
 .table {
     /*border-left: 1px solid #dee2e6;
@@ -92,4 +92,3 @@ footer {
 .bold {
     font-weight: 700;
 }
-
