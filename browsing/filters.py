@@ -107,3 +107,16 @@ class GlyphListFilter(django_filters.FilterSet):
     class Meta:
         model = Glyph
         exclude = ['tablet', 'image']
+
+#filter by sign, returns glyphs
+class CompareSignsListFilter(django_filters.FilterSet):
+    sign__sign_name = django_filters.ModelMultipleChoiceFilter(
+        queryset=Sign.objects.all(), label='Signs',
+        help_text='Filter by selecting one ore more Signs.')
+    sign__abz_number = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
+    sign__meszl_number = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
+    
+
+    class Meta:
+        model = Glyph
+        fields = ['sign__sign_name', 'sign__abz_number', 'sign__meszl_number']

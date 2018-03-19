@@ -47,6 +47,18 @@ class GlyphTable(tables.Table):
         attrs = {"class": "table table-hover table-striped table-condensed"}
 
 
+class CompareSignTable(tables.Table):
+    identifier = tables.LinkColumn('tablets:glyph_detail', args=[A('pk')], verbose_name='Glyph')
+    tablet = tables.LinkColumn(
+        'tablets:tablet_detail', args=[A('tablet.pk')], verbose_name='Tablet')
+    sign = tables.LinkColumn('tablets:sign_detail', args=[A('sign.pk')], verbose_name='Sign')
+
+    class Meta:
+        model = Glyph
+        exclude = ['id', 'image', 'note']
+        attrs = {"class": "table table-hover table-striped table-condensed"}
+
+
 class TabletImageTable(tables.Table):
     id = tables.LinkColumn(
         'tablets:tabletimg_detail', args=[A('pk')], verbose_name='ID')
