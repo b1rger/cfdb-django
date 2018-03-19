@@ -6,3 +6,4 @@ class LabelSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Label
+        fields = '__all__'
