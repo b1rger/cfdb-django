@@ -22,19 +22,46 @@
 
     </div>
     <div class="card-body">
-        <div class="col-sm-6">
-         <form action="" method="get">
-		{% load crispy_forms_tags %}
-		{% crispy filter.form filter.form.helper %}
-		</form>
+        <form method="get" action="{% url 'browsing:compare_signs' %}" class="navbar-form">
+                <div class="form-group">
+                    <div class="input-group">
+                    Sign 1 <input type="text" class="form-control" name="sign_first" placeholder="search..." required/>
+                    Sign 2 <input type="text" class="form-control" name="sign_second" placeholder="search..." required/>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+        </form>
 
+    <div class="row">
+        <div class="col-sm-6">
+        <p>Sign 1 results</p>
+         
+
+        {% if 'sign_first' in request.GET %}
+
+        <p>{{ sign_first_results_count }}</p>
+
+        {% for x in sign_first_results %}
+        <li>{{x.identifier}}</li>
+        {% endfor %}
+
+        {% endif %}
         </div>
-        <div>
-        	
-    {% for obj in filter.qs %}
-       <li> {{ obj.identifier }} - {{ obj.image }}<li/>
-    {% endfor %}
+        <div class="col-sm-6">
+        <p>Sign 2 results</p>
+
+          {% if 'sign_second' in request.GET %}
+
+        <p>{{ sign_second_results_count }}</p>
+
+        {% for x in sign_second_results %}
+        <li>{{x.identifier}}</li>
+        {% endfor %}
+
+        {% endif %}
         </div>
+    </div>
     </div>
 </div>
 </div>

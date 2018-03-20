@@ -67,6 +67,31 @@ class CompareSignListView(GenericListView):
 #     return render(request, 'browsing/compare_sign_list_generic.html', {'filter': f, 'example_form': example_form})
 
 
+def compare_signs(request):
+    context = {}
+    if 'sign_first' and 'sign_second' in request.GET:
+        sign_first_string = request.GET.get('sign_first', '')
+        sign_second_string = request.GET.get('sign_second', '')
+        sign_first_results = Glyph.objects.filter(sign__sign_name=sign_first_string)
+        sign_second_results = Glyph.objects.filter(sign__sign_name=sign_second_string)
+        sign_first_results_count = sign_first_results.count()
+        sign_second_results_count = sign_second_results.count()
+    else:
+        sign_first_string = ''
+        sign_first_results = None
+        sign_first_results_count = None
+        sign_second_string = ''
+        sign_second_results = None
+        sign_second_results_count = None
+    context['sign_first_string'] = sign_first_string
+    context['sign_first_results'] = sign_first_results
+    context['sign_first_results_count'] = sign_first_results_count
+    context['sign_second_string'] = sign_second_string
+    context['sign_second_results'] = sign_second_results
+    context['sign_second_results_count'] = sign_second_results_count
+    return render(request, 'browsing/compare_sign_list_generic.html', context)
+
+
 class TabletImageListView(GenericListView):
     model = TabletImage
     table_class = TabletImageTable

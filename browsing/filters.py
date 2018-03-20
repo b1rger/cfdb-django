@@ -110,13 +110,30 @@ class GlyphListFilter(django_filters.FilterSet):
 
 #filter by sign, returns glyphs
 class CompareSignsListFilter(django_filters.FilterSet):
-    sign__sign_name = django_filters.ModelMultipleChoiceFilter(
-        queryset=Sign.objects.all(), label='Signs',
-        help_text='Filter by selecting one ore more Signs.')
+    sign1 = django_filters.ModelChoiceFilter(
+        queryset=Sign.objects.all(), label='Signs1', name='sign__sign_name',
+        help_text='Filter by selecting one ore more Signs.',
+        method="custom_filter_sign1")
+    sign2 = django_filters.ModelChoiceFilter(
+        queryset=Sign.objects.all(), label='Signs2', name='sign__sign_name',
+        help_text='Filter by selecting one ore more Signs.',
+        method="custom_filter_sign2")
     sign__abz_number = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
     sign__meszl_number = django_filters.CharFilter(lookup_expr='icontains', help_text=False)
     
 
     class Meta:
         model = Glyph
-        fields = ['sign__sign_name', 'sign__abz_number', 'sign__meszl_number']
+        fields = ['sign1', 'sign2', 'sign__abz_number', 'sign__meszl_number']
+
+
+    def custom_filter_sign1(self, qs, name, value):
+        if value:
+            qs = Glyph.objects.filter(sign__sign_name=value)
+        return qs
+
+    def custom_filter_sign2(self, qs, name, value):
+        if value:
+            qs += Glyph.objects.filter(sign__sign_name=value) 
+        return qs
+
