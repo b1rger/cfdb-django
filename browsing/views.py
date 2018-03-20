@@ -4,6 +4,7 @@ from .filters import *
 from .forms import GenericFilterFormHelper, TabletFilterFormHelper
 from .tables import *
 from django.shortcuts import render
+from vocabularies.models import Region, Period
 
 
 class GenericListView(SingleTableView):
@@ -91,6 +92,8 @@ def compare_signs(request):
     context['sign_second_results_count'] = sign_second_results_count
     signs = Sign.objects.all()
     context['signs'] = signs
+    context['region_list'] = Region.objects.exclude(name='')
+    context['period_list'] = Period.objects.values_list('name', flat=True).distinct().exclude(name='')
     return render(request, 'browsing/compare_sign_list_generic.html', context)
 
 
