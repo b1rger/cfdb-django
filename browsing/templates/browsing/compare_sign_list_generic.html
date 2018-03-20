@@ -24,12 +24,24 @@
     <div class="card-body">
         <form method="get" action="{% url 'browsing:compare_signs' %}" class="navbar-form">
                 <div class="form-group">
-                    <div class="input-group">
+                  <!--   <div class="input-group">
                     Sign 1 <input type="text" class="form-control" name="sign_first" placeholder="search..." required/>
                     Sign 2 <input type="text" class="form-control" name="sign_second" placeholder="search..." required/>
+                    </div> -->
+
+                    <div class="input-group">
+                    Sign 1 <input list="signs" class="form-control" name="sign_first" placeholder="Select sign" required />
+                    Sign 2 <input list="signs" class="form-control" name="sign_second" placeholder="Select sign" required/>
+                    <datalist id="signs">
+                    {% for x in signs %}
+                    <option value="{{x.sign_name}}">
+                    {% endfor %}
+                    </datalist>
                     </div>
+
                     <br>
                     <button type="submit" class="btn btn-primary">Search</button>
+                    <a class ="btn btn-outline-secondary"  href="{% url 'browsing:compare_signs' %}">Reset search</a> 
                 </div>
         </form>
 

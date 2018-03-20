@@ -89,6 +89,8 @@ def compare_signs(request):
     context['sign_second_string'] = sign_second_string
     context['sign_second_results'] = sign_second_results
     context['sign_second_results_count'] = sign_second_results_count
+    signs = Sign.objects.all()
+    context['signs'] = signs
     return render(request, 'browsing/compare_sign_list_generic.html', context)
 
 
