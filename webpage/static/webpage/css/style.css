@@ -92,3 +92,7 @@ footer {
 .bold {
     font-weight: 700;
 }
+select[multiple] {
+    height: 200px;
+    display: block;
+}

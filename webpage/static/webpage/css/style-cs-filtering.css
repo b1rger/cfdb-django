@@ -26,14 +26,30 @@ hr {
   margin: 1%;
   text-align: center;
 }
-.grid-item:hover {
+/*item for sign-compare grid*/
+.item-compare {
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  /*border: 1px solid grey;*/
+  box-shadow: 2px 2px 24px 0 rgba(0, 0, 0, .2);
+  width: calc(94% / 3);
+  margin: 1%;
+  text-align: center;
+}
+.grid-item:hover, .item-compare:hover {
 	box-shadow: 2px 2px 24px 0 rgba(0, 0, 0, .4);
 }
-
+@media (min-width: 768px) and (max-width: 1331px) {
+  .item-compare { width: calc(94% / 2); }
+ }
 
 @media (min-width: 480px) and (max-width: 768px) {
 
-  .grid-item { width: calc(94% / 2); }
+  .grid-item, .item-compare { width: calc(94% / 2); }
   .glyph-image { width: 50%; }
 
 }
@@ -151,4 +167,11 @@ hr {
 .bootstrap-slider .slider-handle {
   background-image: none;
   background-color: #007bff;
+}
+.image-wrapper {
+  width: auto;
+  height: 170px;
+}
+.sign-select-label {
+  padding: 5px;
 }

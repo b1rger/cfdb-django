@@ -55,19 +55,6 @@ class GlyphListView(GenericListView):
     formhelper_class = GenericFilterFormHelper
 
 
-class CompareSignListView(GenericListView):
-    model = Glyph
-    table_class = GlyphTable
-    template_name = 'browsing/compare_sign_list_generic.html'
-    filter_class = CompareSignsListFilter
-    formhelper_class = GenericFilterFormHelper
-
-# def compareSignListView(request):
-#     f = CompareSignsListFilter(request.GET, queryset=Glyph.objects.all())
-#     example_form = GenericFilterFormHelper()
-#     return render(request, 'browsing/compare_sign_list_generic.html', {'filter': f, 'example_form': example_form})
-
-
 def compare_signs(request):
     context = {}
     if 'sign_first' and 'sign_second' in request.GET:
@@ -77,6 +64,8 @@ def compare_signs(request):
         sign_second_results = Glyph.objects.filter(sign__sign_name=sign_second_string)
         sign_first_results_count = sign_first_results.count()
         sign_second_results_count = sign_second_results.count()
+        sign_obj_f = Sign.objects.filter(sign_name=sign_first_string)
+        sign_obj_s = Sign.objects.filter(sign_name=sign_second_string)
     else:
         sign_first_string = ''
         sign_first_results = None
@@ -84,6 +73,8 @@ def compare_signs(request):
         sign_second_string = ''
         sign_second_results = None
         sign_second_results_count = None
+        sign_obj_f = None
+        sign_obj_s = None
     context['sign_first_string'] = sign_first_string
     context['sign_first_results'] = sign_first_results
     context['sign_first_results_count'] = sign_first_results_count
@@ -92,6 +83,8 @@ def compare_signs(request):
     context['sign_second_results_count'] = sign_second_results_count
     signs = Sign.objects.all()
     context['signs'] = signs
+    context['sign_obj_f'] = sign_obj_f
+    context['sign_obj_s'] = sign_obj_s
     context['region_list'] = Region.objects.exclude(name='')
     context['period_list'] = Period.objects.values_list('name', flat=True).distinct().exclude(name='')
     return render(request, 'browsing/compare_sign_list_generic.html', context)

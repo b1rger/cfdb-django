@@ -13,13 +13,12 @@
       <link rel="stylesheet" href="{% static 'webpage/css/style-cs-filtering.css' %}"/></link>
 {% endblock %}
 
-
 {% block index-content %}
 <div class="row" style="padding-left: 10px; padding-right: 10px;">
 <div class="col-sm-4">
 <div class="card">
     <div class="card-header" style="color: #ffffff; background-color: #424242;">
-        <h3>Compare Signs</h3>
+        <h3>Compare Standard Signs</h3>
     </div>
     <div class="card-body">
         <form method="get" action="{% url 'browsing:compare_signs' %}" class="navbar-form">
@@ -83,13 +82,8 @@
                       <b class="filter-max">0 BC</b>
                     </div>
             </div>
-
 </div>
-
-
 </div>
-
-
 </div>
 
 
@@ -97,14 +91,19 @@
 <div class="col-sm-4">
 <div class="card">
 <div class="card-header">
+        <p><b>{{ sign_first_results_count }}</b> total result(s) for sign <b>{{sign_first_string}}</b></p>
 
-        <p>{{ sign_first_results_count }} Results for sign <b>{{sign_first_string}}</b></p>
+        {% for x in sign_obj_f %}
+        <div class="image-wrapper">
+        <img src="/media/sign_img/{{ x.image1_name }}" width="100"/>
+        </div>
+        {% endfor %}
 </div>
     <div class="card-body">
 <div class="grid">
         {% for x in sign_first_results %}
         
-        <div class="grid-item {{x.tablet.region.get_slug_name}} {{x.tablet.period.name}}" data-year="{{x.tablet.year}}" data-toggle="tooltip" data-placement="top" title="Reading: {{ x.reading }}
+        <div class="item-compare {{x.tablet.region.get_slug_name}} {{x.tablet.period.name}}" data-year="{{x.tablet.year}}" title="Reading: {{ x.reading }}
 Context: {{ x.context }}    
 Period: {{ x.tablet.period.name }}
 Year: {{ x.tablet.year }}
@@ -115,11 +114,8 @@ Scribe: {{ x.tablet.scribe.name }}">
 <img src="/media/glyph_img/{{ x.filename }}" class="glyph-image">
 </a>
 </div>
-        
         {% endfor %}
 </div>
-        
-
     </div>
 </div>
 </div>
@@ -130,14 +126,18 @@ Scribe: {{ x.tablet.scribe.name }}">
 <div class="col-sm-4">
 <div class="card">
 <div class="card-header">
-
-        <p>{{ sign_second_results_count }} Results for sign <b>{{sign_second_string}}</b></p>
+        <p><b>{{ sign_second_results_count }}</b> total result(s) for sign <b>{{sign_second_string}}</b></p>
+        {% for x in sign_obj_s %}
+        <div class="image-wrapper">
+        <img src="/media/sign_img/{{ x.image1_name }}" width="100"/>
+        </div>
+        {% endfor %}
 </div>
 <div class="card-body">
 <div class="grid">
         {% for x in sign_second_results %}
        
-       <div class="grid-item {{x.tablet.region.get_slug_name}} {{x.tablet.period.name}}" data-year="{{x.tablet.year}}" data-toggle="tooltip" data-placement="top" title="Reading: {{ x.reading }}
+       <div class="item-compare {{x.tablet.region.get_slug_name}} {{x.tablet.period.name}}" data-year="{{x.tablet.year}}" title="Reading: {{ x.reading }}
 Context: {{ x.context }}    
 Period: {{ x.tablet.period.name }}
 Year: {{ x.tablet.year }}
@@ -163,7 +163,7 @@ Scribe: {{ x.tablet.scribe.name }}">
 
 $(window).on('load resize', function (){
 $('.grid').isotope({
- itemSelector: '.grid-item',
+ itemSelector: '.item-compare',
 });
 
 });
@@ -182,7 +182,7 @@ $(document).ready( function() {
   // Initialise Isotope
   // Set the item selector
   var $grid = $('.grid').isotope({
-    itemSelector: '.grid-item',
+    itemSelector: '.item-compare',
     // layout: 'masonry',
     // use filter function
     filter: function() {
