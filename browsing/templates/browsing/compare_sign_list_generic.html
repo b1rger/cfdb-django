@@ -15,25 +15,16 @@
 
 
 {% block index-content %}
-
 <div class="row" style="padding-left: 10px; padding-right: 10px;">
 <div class="col-sm-4">
 <div class="card">
     <div class="card-header" style="color: #ffffff; background-color: #424242;">
-    
         <h3>Compare Signs</h3>
-
     </div>
     <div class="card-body">
         <form method="get" action="{% url 'browsing:compare_signs' %}" class="navbar-form">
                 <div class="form-group">
-                  <!--   <div class="input-group">
-                    Sign 1 <input type="text" class="form-control" name="sign_first" placeholder="search..." required/>
-                    Sign 2 <input type="text" class="form-control" name="sign_second" placeholder="search..." required/>
-                    </div> -->
-
-
-                    <div class="input-group mb-2">
+                     <div class="input-group mb-2">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Sign 1</label>
                       </div>
@@ -59,16 +50,11 @@
     </div>
 </div>
 <br>
-
 <div class="card">
 <div class="card-header">
-Filter options
+<h3>Filter options</h3>
 </div>
 <div class="card-body">
-
- <div class="search">
-            <p><input type="text" class="quicksearch" placeholder="Search..." id="quicksearch"/></p>
-            </div>
             <div class="filters" id="filters">
 
                 <div class="button-group" data-filter-group="region">
@@ -107,11 +93,11 @@ Filter options
 </div>
 
 
-
+{% if 'sign_first' in request.GET %}
 <div class="col-sm-4">
 <div class="card">
 <div class="card-header">
-{% if 'sign_first' in request.GET %}
+
         <p>{{ sign_first_results_count }} Results for sign <b>{{sign_first_string}}</b></p>
 </div>
     <div class="card-body">
@@ -132,15 +118,19 @@ Scribe: {{ x.tablet.scribe.name }}">
         
         {% endfor %}
 </div>
-        {% endif %}
+        
 
     </div>
 </div>
 </div>
+{% else %}
+<h2 class="text-muted">Please select signs to compare</h2>
+{% endif %}
+{% if 'sign_second' in request.GET %}
 <div class="col-sm-4">
 <div class="card">
 <div class="card-header">
-{% if 'sign_second' in request.GET %}
+
         <p>{{ sign_second_results_count }} Results for sign <b>{{sign_second_string}}</b></p>
 </div>
 <div class="card-body">
@@ -161,14 +151,11 @@ Scribe: {{ x.tablet.scribe.name }}">
        
         {% endfor %}
 </div>
-        {% endif %}
-
-
-</div>
-
 </div>
 </div>
-
+</div>
+{% else %}
+{% endif %}
 </div>
 
 
@@ -203,16 +190,16 @@ $(document).ready( function() {
       var year = $this.attr('data-year');
       var isInyearRange = (rangeFilters['year'].min <= year && rangeFilters['year'].max >= year);
       //regex
-      var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
-      return $this.is( buttonFilter ) && isInyearRange && searchResult;
+      // var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
+      return $this.is( buttonFilter ) && isInyearRange;
     }
   });
 
   // use value of search field to filter
-var $quicksearch = $('#quicksearch').keyup( debounce( function() {
-  qsRegex = new RegExp( $quicksearch.val(), 'gi' );
-  $grid.isotope();
-}) );
+// var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+//   qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+//   $grid.isotope();
+// }) );
   // Initialise Sliders
   // Set min/max range on sliders as well as default values
   var $yearSlider = $('#filter-year').slider({ tooltip_split: true, min: 0,  max: 800, range: true, value: [0, 800], reversed: true });
@@ -297,11 +284,6 @@ function debounce( fn, threshold ) {
   };
 }
 </script> 
-
-
-
-
-
 {% endblock %}
 
 {% block customScripts %}
