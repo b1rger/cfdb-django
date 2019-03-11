@@ -12,7 +12,7 @@ PROJECT_METADATA = {
      hervorgehenden Forschungsdaten und -ergebnisse.',
     'purpose_en': 'This website provides information on the project LaBaSi as well as the data and results emerging from this project.',
     'version': '0.0.1',
-    'matomo_id': '34',
+    'matomo_id': '35',
     'matomo_url': '//matomo.acdh.oeaw.ac.at/',
     'imprint': '/imprint',
     'app_type': 'database',
