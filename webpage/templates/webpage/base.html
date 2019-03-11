@@ -23,25 +23,21 @@
         <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
       <!--font awesome-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <!-- Piwik -->
-        <script type="text/javascript">
-            var _paq = _paq || [];
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function() {
-              var u="//clarin.oeaw.ac.at/piwik/";
-              _paq.push(['setTrackerUrl', u+'piwik.php']);
-              _paq.push(['setSiteId', 35]);
-              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-              g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-            })();
-        </script>
-        <noscript>
-            <p>
-                <img src="//clarin.oeaw.ac.at/piwik/piwik.php?idsite=35" style="border:0;" alt=""/>
-            </p>
-        </noscript>
-      <!-- end of Piwik -->
+      <!-- Matomo -->
+      <script type="text/javascript">
+        var _paq = _paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//matomo.acdh.oeaw.ac.at/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId', '34']);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+      </script>
+    <!-- End Matomo Code -->
       <!-- Cookie Consent plugin -->
         <script type="text/javascript">
             window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":"{% url 'webpage:template' template='imprint' %}","theme":"dark-bottom"};
