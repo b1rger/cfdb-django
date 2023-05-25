@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # 'django_spaghetti',
     'reversion',
     'crispy_forms',
+    'crispy_bootstrap3',
     'rest_framework',
     'browsing',
     'webpage',
@@ -136,3 +137,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
+
+DEBUG = True
+SECRET_KEY = "foo"
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "/tmp/db.sqlite3",
+    },
+}
