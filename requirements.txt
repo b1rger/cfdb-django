@@ -17,7 +17,7 @@ djangorestframework==3.14.0
 entrypoints==0.2.3
 html5lib==0.999999999
 idna==2.5
-ipykernel==4.6.1
+ipykernel>=6
 ipython==8.13.2
 ipython-genutils==0.2.0
 isodate==0.6.1
@@ -30,9 +30,9 @@ MarkupSafe==2.0
 matplotlib>=3
 mistune==0.8.1
 mysqlclient>=2
-nbconvert==5.2.1
+nbconvert>=7
 nbformat==5.8.0
-notebook==5.0.0
+notebook==6
 numpy>=1.24
 pandas>=2
 pandocfilters==1.4.1
@@ -46,7 +46,7 @@ pyzmq>=25
 rdflib>=6
 requests>=2
 simplegeneric==0.8.1
-six==1.10.0
+six==1.16
 slugify==0.0.1
 SPARQLWrapper==2.0
 testpath==0.3.1
